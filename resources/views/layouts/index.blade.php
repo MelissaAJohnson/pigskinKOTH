@@ -2,7 +2,7 @@
 
 
 @section('title')
-    KOTH
+    Pigskin KOTH
 @stop
 
 
@@ -17,7 +17,9 @@ such as a page specific styesheets.
 
 
 @section('content')
-	<h1>Cool content will be here!</h1>
+
+  Cool content coming!
+
 @stop
 
 
