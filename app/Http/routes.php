@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/account', 'AccountController@getIndex');
+
+Route::get('/team', 'TeamController@getIndex');
+
+Route::get('/pick', 'PickController@getIndex');
