@@ -13,12 +13,39 @@ such as a page specific styesheets.
 --}}
 @section('head')
 
+  <link href="/css/custom.css" type='text/css' rel='stylesheet'>
+
 @stop
 
 
 @section('content')
 
-  Cool content coming!
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Love Football Pools?</h1>
+      <p>Pigskin King of the Hill provides the thrill of a friendly football wager without all the work of fantasy leagues. Just pick a team you expect to win every week. If they win, you're in. If they lose, you're out. The catch? You can only pick a team once for the whole season.</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Join Now &raquo;</a></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center my-border" id="NumberLeaguePlayers">
+        <h2>200,000</h2>
+        <p>National League Players</p>
+      </div>
+      <div class="col-md-3 text-center my-border" id="NumberSurvivingPlayers">
+        <h2>20</h2>
+        <p>League Survivors</p>
+     </div>
+      <div class="col-md-3 text-center my-border" id="NumberPlayersNoLosses">
+        <h2>5</h2>
+        <p>Players with no losses</p>
+      </div>
+    </div>
+  </div>
+
+  <br />
 
 @stop
 

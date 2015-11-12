@@ -1,0 +1,9 @@
+/* This houses all of my custom styles */
+
+.my-border {
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: black;
+  margin: 15px;
+}

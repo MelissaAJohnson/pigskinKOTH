@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('layouts.index');
 });
 
+Route::get('/{username}', function($username) {
+	return view('dashboard');
+});
+
 Route::get('/account', 'AccountController@getIndex');
 
 Route::get('/team', 'TeamController@getIndex');
