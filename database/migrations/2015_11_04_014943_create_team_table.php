@@ -24,8 +24,10 @@ class CreateTeamTable extends Migration
 
         # The rest of the fields...
         $table->string('name');
+        $table->integer('league_id');
 
-        # FYI: We're skipping the 'tags' field for now; more on that later.
+        $table->integer('owner_id')->unsigned();
+        $table->foreign('owner_id')->references('id')->on('users');
 
     });
     }

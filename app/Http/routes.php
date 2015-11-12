@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('layouts.index');
 });
 
-Route::get('/{username}', function($username) {
+Route::get('/{user_email}', function($user_email) {
 	return view('dashboard');
 });
 

@@ -14,9 +14,6 @@ class UsersTableSeeder extends Seeder
         // Code that creates fake information
         $faker = \Faker\Factory::create();
 
-		# Instantiate a new User Model object
-		$book = new \App\Book();
-
         // Add 100 users to database
         for ($i=0; $i < 100; $i++) {
 
@@ -24,12 +21,21 @@ class UsersTableSeeder extends Seeder
 			$user = new \App\User();
 
 			# Set the parameters
-			$user->name = $faker->name;
+			$user->first_name = $faker->firstName;
+			$user->last_name = $faker->lastName;
 			$user->email = $faker->email;
 			$user->password = $faker->password;
 
 			# This will generate a new row in the `users` table, with the above data
 			$user->save();
         }
+
+        // Required user
+        $user = new \App\User();
+        $user->first_name="Jill";
+        $user->last_name="";
+        $user->email="jill@harvard.edu";
+        $user->password="helloworld";
+        $user->save();
     }
 }
