@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
 			# Set the parameters
 			$user->first_name = $faker->firstName;
 			$user->last_name = $faker->lastName;
-			$user->email = $faker->email;
+			$user->email = $user->first_name.$user->last_name.'@'.$faker->safeEmailDomain ;
 			$user->password = $faker->password;
 
 			# This will generate a new row in the `users` table, with the above data
