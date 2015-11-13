@@ -26,6 +26,7 @@ class TeamsTableSeeder extends Seeder
 			$team->name = $faker->word;
 			$team->league_id = 0;
 			$team->owner_id = $id;
+            $team->active=rand(0,1);
 
 			# This will generate a new row in the `teams` table, with the above data
 			$team->save();

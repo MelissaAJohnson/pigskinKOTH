@@ -16,7 +16,7 @@ class AccountController extends Controller
      */
 
      public function getIndex() {
-        return 'Add and edit account information here';
+        return view('account');
      }
 
     /**
