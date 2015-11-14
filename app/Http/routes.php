@@ -29,11 +29,15 @@ Route::get('/{user_id}', function($user_id) {
 });
 */
 
-Route::get('/account', 'AccountController@getIndex');
+Route::get('/account/create', 'AccountController@getCreate');
+Route::post('/account/create', 'AccountController@postCreate');
 
-Route::get('/team', 'TeamController@getIndex');
+Route::get('/team/create', 'TeamController@getCreate');
+Route::post('/team/create', 'TeamController@postCreate');
 
 Route::get('/pick', 'PickController@getIndex');
+
+Route::get('/dashboard', 'DashboardController@getIndex');
 
 Route::get('/debug', function() {
 

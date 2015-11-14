@@ -36,22 +36,42 @@ such as a page specific stylesheets.
     <p>Information on this page helps identify you and your preferences.</p>
     
     <div class="container">
-	    <form>
+	    <form method="POST" action='/account/create'>
+	    	<input type="hidden" value="{{ csrf_token() }}" name="_token">
 	        <h3>About You</h3>
 	        <fieldset name = "userInformation">
 	            <div class = "form-group">
 	                <label for="firstName">First Name</label>
-	                <input type = "text" id = "firstName" class = "form-control" placeholder = "First Name">
+	                <input 
+	                	type = "text" 
+	                	id = "firstName" 
+	                	name = "firstName" 
+	                	class = "form-control" 
+	                	placeholder = "First Name"
+	                	>
 	            </div>
 	            <div id = "firstNameHint"></div>
 	            <div class = "form-group">
 	                <label for="lastName">Last Name</label>
-	                <input type = "text" id = "lastName" class = "form-control" placeholder = "Last Name">
+	                <input 
+	                	type = "text" 
+	                	id = "lastName" 
+	                	name = "lastName" 
+	                	class = "form-control" 
+	                	placeholder = "Last Name"
+	                	>
 	            </div>
 	            <div id = "lastNameHint"></div>
 	            <div class = "form-group">
 	                <label for="email">Email Address</label>
-	                <input type = "email" id = "email" class = "form-control" placeholder = "Email Address" required>
+	                <input 
+	                	type = "email" 
+	                	id = "email" 
+	                	name = "email" 
+	                	class = "form-control" 
+	                	placeholder = "Email Address" 
+	                	required
+	                	>
 	            </div>
 	            <div id="emailHint"></div>
 	        </fieldset>
@@ -60,21 +80,31 @@ such as a page specific stylesheets.
 	        <fieldset name = "password">
 	            <div class = "form-group">
 	                <label for = "password">Password</label>
-	                <input type = "password" id="password" class = "form-control" placeholder = "Password (8 characters or more)">
+	                <input 
+	                	type = "password" 
+	                	id="password" 
+	                	name="password" 
+	                	class = "form-control" 
+	                	placeholder = "Password (8 characters or more)">
 	            </div>
 	            <div id = "passwordHint"></div>
 	            <div class = "form-group">
 	                <label for = "confirmPassword">Confirm Password</label>
-	                <input type = "password" id="confirmPassword" class = "form-control" placeholder = "Confirm Password">
+	                <input 
+	                	type = "password" 
+	                	id="confirmPassword" 
+	                	class = "form-control" 
+	                	placeholder = "Confirm Password">
 	            </div>
 	            <div id = "confirmPasswordHint"></div>
 	        </fieldset>
+
+			<br />
+	        <button type = "submit" id = "accountSave" class = "btn btn-default">Save</button>
 	    
 	    </form>
-	    
-	    <br />
-	    <a href = "index.html".<button type = "submit" id = "accountSave" class = "btn btn-default">Save</button></a>
-    	</div>
+
+    </div>
 @stop
 
 

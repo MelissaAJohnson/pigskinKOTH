@@ -35,9 +35,9 @@ such as a page specific styesheets.
 
   <div class="jumbotron">
     <div class="container">
-      <h1>Love Football Pools?</h1>
+      <h1>Love Football?</h1>
       <p>Pigskin King of the Hill provides the thrill of a friendly football wager without all the work of fantasy leagues. Just pick a team you expect to win every week. If they win, you're in. If they lose, you're out. The catch? You can only pick a team once for the whole season.</p>
-      <p><a class="btn btn-primary btn-lg" href="/account" role="button">Join Now &raquo;</a></p>
+      <p><a class="btn btn-primary btn-lg" href="/account/create" role="button">Join Now &raquo;</a></p>
     </div>
   </div>
 

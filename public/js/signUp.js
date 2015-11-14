@@ -106,14 +106,14 @@ window.onload = function () {
     })
     
     
-    // This function detects when the user clicks to add another league and adds another input field as well as add and delete options for every line
-    $('#addLeague').click (function() {
-        $("#addLeague" ).remove();// remove addLeague button
-        $("<span style = 'color:red; cursor: pointer; padding-left:1em'><span class='glyphicon glyphicon-minus-sign' aria-hidden='true'></span> League</span>").insertAfter('#leagueName'); // add remove league option
-        $("<br /><br /><div class='form-group' id='leagues1'>").insertAfter('#leagues'); // create new div
-        $('#leagues1').append("<label for='leagues1' class='sr-only' id = 'leaguesLabel1'>League Name </label>"); // add label to new div
-        $("<input type='text' class='form-control' id='leagueName1' placeholder='League Name'>").insertAfter('#leaguesLabel1'); // add text input box after new label
-        $("<span style = 'color:green; cursor: pointer; padding-left:1em'><span class='glyphicon glyphicon-plus-sign' aria-hidden='true'></span> League</span>").insertAfter('#leagueName1'); // add a new addLeague option
+    // This function detects when the user clicks to add another team and adds another input field as well as add and delete options for every line
+    $('#addTeam').click (function() {
+        $("#addTeam" ).remove();// remove addTeam button
+        $("<span style = 'color:red; cursor: pointer; padding-left:1em'><span class='glyphicon glyphicon-minus-sign' aria-hidden='true'></span> Team</span>").insertAfter('#teamName'); // add remove team option
+        $("<br /><br /><div class='form-group' id='teams1'>").insertAfter('#teams'); // create new div
+        $('#teams1').append("<label for='teams1' id = 'teamsLabel1'>Team Name </label>"); // add label to new div
+        $("<input type='text' class='form-control' id='teamName1' placeholder='Team Name'>").insertAfter('#teamsLabel1'); // add text input box after new label
+        $("<span style = 'color:green; cursor: pointer; padding-left:1em'><span class='glyphicon glyphicon-plus-sign' aria-hidden='true'></span> Team</span>").insertAfter('#teamName1'); // add a new addTeam option
     })
     
 }

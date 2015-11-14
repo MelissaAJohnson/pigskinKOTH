@@ -9,79 +9,34 @@ use App\Http\Controllers\Controller;
 
 class AccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-     public function getIndex() {
-        return view('account');
-     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    // Responds to requests to GET /account
+    public function getCreate() {
+        return view('account.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    // Responds to requests to POST /account
+    public function postCreate(Request $request) { 
+        // Validate fields
+        //$this->validate($request, [
+        //    'firstName' => 'required|numeric'
+        //]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        // Create user
+            // Instantiate a new User Model object
+            $user = new \App\User();
+            
+            // Set parameters
+            $user->first_name = $request->firstName;
+            $user->last_name = $request->lastName;
+            $user->email = $request->email;
+            $user->password = $request->password;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+            // This will generate a new row in the `users` table, with the above data
+            $user->save();
+        // End create user
+        
+        // return view()
+        return redirect('/team/create')->with('user', $user);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

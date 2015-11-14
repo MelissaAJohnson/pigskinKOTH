@@ -9,78 +9,38 @@ use App\Http\Controllers\Controller;
 
 class TeamController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-     public function getIndex() {
-        return 'Add and edit team information here';
-     }
+    public function getCreate() {
+        return view('team.create');
+    }
+    
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        // Responds to requests to POST /team
+    public function postCreate(Request $request) { 
+        // Validate fields
+        //$this->validate($request, [
+        //    'firstName' => 'required|numeric'
+        //]);
+        // Create team
+            // Instantiate a new Team Model object
+            $team = new \App\Team();
+
+            // Grab user attributes of newly created account
+            $user = \App\User::all()->last();
+
+            
+            // Set parameters
+            $team->name = $request->teamName;
+            $team->league_id = 0;
+            $team->owner_id = $user->id;
+            $team->active = 1;
+
+            // This will generate a new row in the `teams` table, with the above data
+            $team->save();
+        // End create user 
+        
+        // return view()
+        return redirect('/dashboard')->with('team', $team);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
