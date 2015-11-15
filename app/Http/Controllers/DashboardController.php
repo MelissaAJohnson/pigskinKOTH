@@ -10,7 +10,10 @@ use App\Http\Controllers\Controller;
 class DashboardController extends Controller
 {
     public function getIndex() {
-        return view('dashboard');
+
+        $picks = \App\Pick::all();
+
+        return view('dashboard')->with('picks', $picks);
     }
 
 }

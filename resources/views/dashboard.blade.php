@@ -35,7 +35,33 @@ such as a page specific stylesheets.
 
 @section('content')
 	<h1>Dashboard</h1>
-    Awesome content will go here
+    <div id="myPicksTable"></div>
+    <div id="leaguePicksTable"></div>
+
+	<!-- <?php 
+		$picks = \App\Pick::all();
+
+		foreach ($picks as $pick) {
+			echo $pick->owner_id." ".$pick->week." ".$pick->pick."<br />";
+		}
+	?> -->
+	
+	<table class = 'table table-condensed'>
+		<?php 
+			$picks = \App\Pick::orderBy('pick_owner','ASC', 'week')->get();
+
+			foreach($picks as $pick) { 
+		?>
+	        <tr>
+	            <td>{{ $pick->pick_owner }}</td>
+	            <td>{{ $pick->week }}</td>
+	            <td>{{ $pick->pick }}</td>
+		    </tr>
+
+		<?php }; ?> 
+	</table>
+  	
+
 @stop
 
 
@@ -46,10 +72,7 @@ such as a page specific JavaScript files.
 --}}
 @section('body')
 	<script type="text/javascript" src="/js/dropdown.js"></script>
-	<script>
-	     $(document).ready(function(){
-	        $('.dropdown-toggle').dropdown()
-	    });
-	</script>
+	<script type="text/javascript" src="/js/dashboard.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     
 @stop

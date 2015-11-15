@@ -61,10 +61,5 @@ such as a page specific JavaScript files.
 --}}
 @section('body')
 	<script type="text/javascript" src="/js/dropdown.js"></script>
-	<script>
-	     $(document).ready(function(){
-	        $('.dropdown-toggle').dropdown()
-	    });
-	</script>
 	<script type="text/javaScript" src="/js/signUp.js"></script>
 @stop
