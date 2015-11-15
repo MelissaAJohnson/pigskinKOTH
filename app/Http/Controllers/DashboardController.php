@@ -12,6 +12,7 @@ class DashboardController extends Controller
     public function getIndex() {
 
         $picks = \App\Pick::all();
+        // $teams = \App\Team::all();
 
         return view('dashboard')->with('picks', $picks);
     }

@@ -35,20 +35,40 @@ such as a page specific stylesheets.
 
 @section('content')
 	<h1>Dashboard</h1>
-    <div id="myPicksTable"></div>
+
+	<!-- Account Owner Pick Table -->
+    <!-- <div id="myPicksTable"></div> -->
+
+    <?php $picks = \App\Pick::where('pick_owner', '=', 7)->get();?>
+    <?php $teams = \App\Team::where('id', '=', 7)->get();?>
+    <br />
+    <h4>My Picks</h4>
+    <table class = 'table table-condensed'>	
+    	<tr>
+    		<th>Team</th>
+    		<th class="text-center">1</th> <!-- This needs to be updated to be dynamic according to picks table -->
+    		<th class="text-center">2</th>
+    		<th class="text-center">3</th>
+    		<th class="text-left"></th>
+    	</tr>
+    	<tr><td>Team Name</td> <!-- Need to figure out how to dynamically populate based on logged in user -->
+	    	<?php foreach($picks as $pick) {?>
+	    		<td class="text-center">{{ $pick->pick }}</td>
+	    	<?php } ?> 
+	    	<td>
+	    		<button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"> Edit Pick</span></button>
+	    		&nbsp;&nbsp;<button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"> Make Pick</span></button>
+	    	</td>
+    	</tr>
+    	
+    </table>
+
+
     <div id="leaguePicksTable"></div>
 
-	<!-- <?php 
-		$picks = \App\Pick::all();
-
-		foreach ($picks as $pick) {
-			echo $pick->owner_id." ".$pick->week." ".$pick->pick."<br />";
-		}
-	?> -->
-	
 	<table class = 'table table-condensed'>
 		<?php 
-			$picks = \App\Pick::orderBy('pick_owner','ASC', 'week')->get();
+			$picks = \App\Pick::orderBy('pick_owner','ASC', 'week', 'ASC')->get();
 
 			foreach($picks as $pick) { 
 		?>
