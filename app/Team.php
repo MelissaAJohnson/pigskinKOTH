@@ -13,6 +13,8 @@ class Team extends Model
     }
 
     public function pick() {
+    	# Team has many picks
+    	# Define a one-to-many relationship.
     	return $this->hasMany('\App\Pick');
     }
 }

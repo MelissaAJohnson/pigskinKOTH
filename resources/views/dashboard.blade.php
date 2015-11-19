@@ -72,7 +72,7 @@ such as a page specific stylesheets.
 	<table class = 'table table-condensed'>
 		@foreach($picks as $pick) 
 	        <tr>
-	            <td>{{ $pick->team_id }}</td>
+	            <td>{{ $team->name }}</td>
 	            <td>{{ $pick->week }}</td>
 	            <td>{{ $pick->pick }}</td>
 		    </tr>
