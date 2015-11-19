@@ -43,7 +43,8 @@ such as a page specific stylesheets.
             	class="form-control input-large" 
             	id="teamName" 
             	name="teamName"
-            	placeholder="Team Name">
+            	placeholder="Team Name"
+            >
         </div>
         <span style = "cursor:pointer; padding-left:.75em" id = "addTeam" name-"addTeam"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Team</span>
 

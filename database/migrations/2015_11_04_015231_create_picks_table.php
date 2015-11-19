@@ -26,8 +26,8 @@ class CreatePicksTable extends Migration
             $table->integer('week');
             $table->boolean('pick_loss');
 
-            $table->integer('pick_owner')->unsigned();
-            $table->foreign('pick_owner')->references('id')->on('teams');
+            $table->integer('team_id')->unsigned();
+            $table->foreign('team_id')->references('id')->on('teams');
         });
     }
 

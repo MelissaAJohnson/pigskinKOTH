@@ -27,8 +27,8 @@ class CreateTeamTable extends Migration
         $table->integer('league_id');
         $table->boolean('active');
 
-        $table->integer('owner_id')->unsigned();
-        $table->foreign('owner_id')->references('id')->on('users');
+        $table->integer('user_id')->unsigned();
+        $table->foreign('user_id')->references('id')->on('users');
 
     });
     }

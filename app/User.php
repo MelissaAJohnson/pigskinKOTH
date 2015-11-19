@@ -16,6 +16,12 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
+    public function user() {
+        # User has many Teams
+        # Define a one-to-many relationship.
+        return $this->hasMany('\App\Team');
+    }
+
     /**
      * The database table used by the model.
      *

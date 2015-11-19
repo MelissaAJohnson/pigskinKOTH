@@ -35,9 +35,23 @@ Route::post('/account/create', 'AccountController@postCreate');
 Route::get('/team/create', 'TeamController@getCreate');
 Route::post('/team/create', 'TeamController@postCreate');
 
-Route::get('/pick', 'PickController@getIndex');
+Route::get('/dashboard/{id?}', 'DashboardController@getIndex');
+Route::post('/dashboard', 'DashboardController@postPick');
 
-Route::get('/dashboard', 'DashboardController@getIndex');
+
+/*----------------------------------------------------
+Debugging/Local/Misc
+-----------------------------------------------------*/
+if(App::environment('local')) {
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+    Route::get('/drop', function() {
+        DB::statement('DROP database pigskinKOTH');
+        DB::statement('CREATE database pigskinKOTH');
+        return 'Dropped pigskinKOTH; created pigskinKOTH';
+    });
+};
+
 
 Route::get('/debug', function() {
 

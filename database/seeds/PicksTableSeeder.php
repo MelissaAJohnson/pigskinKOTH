@@ -66,7 +66,7 @@ class PicksTableSeeder extends Seeder
 				$pick->pick = $new_pick;
 				$pick->week = $w;
 				$pick->pick_loss = rand(0,1);
-				$pick->pick_owner = $i;
+				$pick->team_id = $i;
 
 				// This will generate a new row in the `picks` table, with the above data
 				$pick->save();

@@ -39,8 +39,6 @@ such as a page specific stylesheets.
 	<!-- Account Owner Pick Table -->
     <!-- <div id="myPicksTable"></div> -->
 
-    <?php $picks = \App\Pick::where('pick_owner', '=', 7)->get();?>
-    <?php $teams = \App\Team::where('id', '=', 7)->get();?>
     <br />
     <h4>My Picks</h4>
     <table class = 'table table-condensed'>	
@@ -49,15 +47,20 @@ such as a page specific stylesheets.
     		<th class="text-center">1</th> <!-- This needs to be updated to be dynamic according to picks table -->
     		<th class="text-center">2</th>
     		<th class="text-center">3</th>
-    		<th class="text-left"></th>
+    		<th></th>
     	</tr>
-    	<tr><td>Team Name</td> <!-- Need to figure out how to dynamically populate based on logged in user -->
-	    	<?php foreach($picks as $pick) {?>
-	    		<td class="text-center">{{ $pick->pick }}</td>
-	    	<?php } ?> 
+    	<tr><td>Team 7</td> <!-- Need to figure out how to dynamically populate based on logged in user -->
+	    	@foreach($myPicks as $myPick)
+	    		<td class="text-center">{{ $myPick->pick }}</td>	
+	    	@endforeach
+
 	    	<td>
-	    		<button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"> Edit Pick</span></button>
-	    		&nbsp;&nbsp;<button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus" aria-hidden="true"> Make Pick</span></button>
+	    		<button type="button" class="btn btn-default btn-xs">
+	    			<span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editModal"> Edit Pick</span>
+	    		</button>&nbsp;&nbsp;
+	    		<button type="button" class="btn btn-default btn-xs">
+	    			<span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#makeModal"> Make Pick</span>
+	    		</button>
 	    	</td>
     	</tr>
     	
@@ -67,20 +70,101 @@ such as a page specific stylesheets.
     <div id="leaguePicksTable"></div>
 
 	<table class = 'table table-condensed'>
-		<?php 
-			$picks = \App\Pick::orderBy('pick_owner','ASC', 'week', 'ASC')->get();
-
-			foreach($picks as $pick) { 
-		?>
+		@foreach($picks as $pick) 
 	        <tr>
-	            <td>{{ $pick->pick_owner }}</td>
+	            <td>{{ $pick->team_id }}</td>
 	            <td>{{ $pick->week }}</td>
 	            <td>{{ $pick->pick }}</td>
 		    </tr>
-
-		<?php }; ?> 
+		@endforeach
 	</table>
   	
+  	<!-- Edit Pick modal -->
+	<div class="modal fade" id="editModal">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title">Edit Pick</h4>
+		      	</div>
+		      	<div class="modal-body">
+		        	<p>One fine body&hellip;</p>
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        	<button type="button" class="btn btn-primary">Save changes</button>
+		      	</div>
+	    	</div>
+	  	</div>
+	</div>
+
+	<!-- Make Pick modal -->
+	<div class="modal fade" id="makeModal">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title">Make Pick</h4>
+		      	</div>
+		      	<div class="modal-body">
+		        	<p>Picks must be made no later than Friday, 3PM Central time. If you want to pick a team playing Thursday, the pick must be made before game start.</p>
+		        	<form method="POST" action='/dashboard#makeModal'>
+				    	<input type="hidden" value="{{ csrf_token() }}" name="_token">
+				        <fieldset name = "userInformation">
+				            <div class = "form-group">
+				            	<label for="pickWeek">Week</label>
+				            	<input type = "text" id="pickWeek" class = "form-control" value="Week 8" disabled><br />
+				            	<label for="pickWeek">Team</label>
+				            	<input type = "text" id="pickTeam" class = "form-control" value="Team" disabled><br />
+				                <label for="pick">Pick</label>
+				                <select id="pick" name="pick" class="form-control">
+			                        <option value="">Select Team</option>
+			                        <option value="ARZ">Arizona Cardinals (ARZ)</option>
+			                        <option value="ATL">Atlanta Falcons (ATL)</option>
+			                        <option value="BAL">Baltimore Ravens (BAL)</option>
+			                        <option value="BUF">Buffalo Bills (BUF)</option>
+			                        <option value="ATL">Atlanta Falcons (ATL)</option>
+			                        <option value="CAR">Carolina Panthers (CAR)</option>
+			                        <option value="CHI">Chicago Bears (CHI)</option>
+			                        <option value="CIN">Cincinnati Bengels (CIN)</option>
+			                        <option value="CLE">Cleveland Browns (CLE)</option>
+			                        <option value="DAL">Dallas Cowboys (DAL)</option>
+			                        <option value="DEN">Denver Broncos (DEN)</option>
+			                        <option value="DET">Detroit Lions (DET)</option>
+			                        <option value="ATL">Atlanta Falcons (ATL)</option>
+			                        <option value="GB">Green Bay Packers (GB)</option>
+			                        <option value="HOU">Houston Texans (HOU)</option>
+			                        <option value="IND">Indianapolis Colts (IND)</option>
+			                        <option value="JAC">Jacksonville Jaguars (JAC)</option>
+			                        <option value="KAN">Kansas City Chiefs (KAN)</option>
+			                        <option value="MIA">Miami Dolphins (MIA)</option>
+			                        <option value="MIN">Minnesota Vikings (MIN)</option>
+			                        <option value="NE">New England Patriots (NE)</option>
+			                        <option value="NO">New Orleans Saints (NO)</option>
+			                        <option value="NYG">New York Giants (NYG)</option>
+			                        <option value="NYJ">New York Jets(NYJ)</option>
+			                        <option value="OAK">Oakland Raiders (OAK)</option>
+			                        <option value="PHI">Philadelphia Eagles (PHI)</option>
+			                        <option value="PIT">Pittsburgh Steelers (PIT)</option>
+			                        <option value="STL">Saint Louis Rams (STL)</option>
+			                        <option value="SD">San Diego Chargers (SD)</option>
+			                        <option value="SF">San Francisco 49ers (SF)</option>
+			                        <option value="SEA">Seattle Seahawks (SEA)</option>
+			                        <option value="TB">Tampa Bay Buccaneers (TB)</option>
+			                        <option value="TEN">Tennessee Titans (TEN)</option>
+			                        <option value="WA">Washington Redskins (WA)</option>
+			                    </select>
+				            </div>
+				        </fieldset>
+				    </form>
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        	<button type="button" type="submit" id="pickCreate" class="btn btn-primary">Save changes</button>
+		      	</div>
+	    	</div>
+	  	</div>
+	</div>
 
 @stop
 
@@ -93,6 +177,8 @@ such as a page specific JavaScript files.
 @section('body')
 	<script type="text/javascript" src="/js/dropdown.js"></script>
 	<script type="text/javascript" src="/js/dashboard.js"></script>
+	<script type="text/javascript" src="/js/modal.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     
 @stop
+
