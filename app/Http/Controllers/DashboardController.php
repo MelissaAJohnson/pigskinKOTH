@@ -13,18 +13,17 @@ class DashboardController extends Controller
 
         // Get all records in Picks table
         $teams = \App\Team::with('pick')->orderBy('name', 'ASC')->get();
-        dump($teams->toArray()); // for debugging
-        
-        $myPicks = $pick->where('id', 7); // UPDATE TO BE LOGGED-IN USER USER ID
-        dump($myPicks); // for debugging
+        // dump($teams->toArray()); // for debugging
 
-        // $currentWeek = $picks->last();
-        // echo $current_week->week; // for debugging
+        $picks = \App\Pick::all();
+        $currentWeek = $picks->last();
+        // dump($picks->toArray()); // for debugging
+        // echo $currentWeek->week; // for debugging
 
-        // $teamCount = $currentWeek->team->id;
-        // echo ("Team count is:").$teamCount; // for debugging
+        $myPicks = \App\Pick::where('team_id', 7)->get();
+        // dump($myPicks->toArray());
 
-        //return view('dashboard')->with('picks', $picks)->with('myPicks', $myPicks)->with('currentWeek', $currentWeek)->with('teamCount', $teamCount);
+        return view('dashboard')->with('teams', $teams)->with('currentWeek', $currentWeek)->with('myPicks', $myPicks);
     }
 
     public function postPick(Request $request) {

@@ -42,14 +42,14 @@ such as a page specific stylesheets.
     <br />
     <h4>My Picks</h4>
     <table class = 'table table-condensed'>	
-    	<tr>
-    		<th>Team</th>
-    		@for ($i = 1; $i < $currentWeek->week + 1; $i++)
-    			<th class="text-center">{{ $i }}</th>
-    		@endfor 
-    		<th></th>
-    	</tr>
-    	<tr><td>Team 7</td> <!-- Need to figure out how to dynamically populate based on logged in user -->
+		<tr>
+			<th>Team</th>
+			@for ($i = 1; $i < $currentWeek->week + 1; $i++)
+				<th class="text-center">{{ $i }}</th>
+			@endfor 
+			<th></th>
+		</tr>
+		<tr><td>Team 7</td> <!-- Need to figure out how to dynamically populate based on logged in user -->
 	    	@foreach($myPicks as $myPick)
 	    		<td class="text-center">{{ $myPick->pick }}</td>	
 	    	@endforeach
@@ -62,29 +62,28 @@ such as a page specific stylesheets.
 	    			<span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#makeModal"> Make Pick</span>
 	    		</button>
 	    	</td>
-    	</tr>
-    	
+		</tr>
     </table>
 
 
-    <!-- <div id="leaguePicksTable"></div> -->
 
+    <!-- <div id="leaguePicksTable"></div> -->
+    <h4>League Picks</h4>
 	<table class = 'table table-condensed'>
 		<tr>
     		<th>Team</th>
-    		@for ($i = 1; $i < $currentWeek->week + 1; $i++)
+    		@for ($i = 1; $i < $currentWeek->week + 1; $i++) <!-- MAKE DYNAMIC -->
     			<th class="text-center">{{ $i }}</th>
     		@endfor 
     		<th></th>
     	</tr>
 
-			@foreach($picks as $pick) 		
+			@foreach($teams as $team) 		
 				<tr>
-					<td>{{ $pick->team->name }}</td>
-
-			        	@for($w=0; $w < 3; $w++)
+					<td>{{ $team->name }}</td>
+			        	@foreach($team->pick as $pick)
 			            	<td class="text-center">{{ $pick->pick }}</td>
-			            @endfor	
+			            @endforeach
 	
 		        </tr>	  	        	 
 			@endforeach
