@@ -44,9 +44,9 @@ such as a page specific stylesheets.
     <table class = 'table table-condensed'>	
     	<tr>
     		<th>Team</th>
-    		<th class="text-center">1</th> <!-- This needs to be updated to be dynamic according to picks table -->
-    		<th class="text-center">2</th>
-    		<th class="text-center">3</th>
+    		@for ($i = 1; $i < $currentWeek->week + 1; $i++)
+    			<th class="text-center">{{ $i }}</th>
+    		@endfor 
     		<th></th>
     	</tr>
     	<tr><td>Team 7</td> <!-- Need to figure out how to dynamically populate based on logged in user -->
@@ -67,16 +67,28 @@ such as a page specific stylesheets.
     </table>
 
 
-    <div id="leaguePicksTable"></div>
+    <!-- <div id="leaguePicksTable"></div> -->
 
 	<table class = 'table table-condensed'>
-		@foreach($picks as $pick) 
-	        <tr>
-	            <td>{{ $team->name }}</td>
-	            <td>{{ $pick->week }}</td>
-	            <td>{{ $pick->pick }}</td>
-		    </tr>
-		@endforeach
+		<tr>
+    		<th>Team</th>
+    		@for ($i = 1; $i < $currentWeek->week + 1; $i++)
+    			<th class="text-center">{{ $i }}</th>
+    		@endfor 
+    		<th></th>
+    	</tr>
+
+			@foreach($picks as $pick) 		
+				<tr>
+					<td>{{ $pick->team->name }}</td>
+
+			        	@for($w=0; $w < 3; $w++)
+			            	<td class="text-center">{{ $pick->pick }}</td>
+			            @endfor	
+	
+		        </tr>	  	        	 
+			@endforeach
+
 	</table>
   	
   	<!-- Edit Pick modal -->
@@ -113,7 +125,7 @@ such as a page specific stylesheets.
 				        <fieldset name = "userInformation">
 				            <div class = "form-group">
 				            	<label for="pickWeek">Week</label>
-				            	<input type = "text" id="pickWeek" class = "form-control" value="Week 8" disabled><br />
+				            	<input type = "text" id="pickWeek" class = "form-control" value= '{{ $currentWeek->week + 1 }}' disabled><br />
 				            	<label for="pickWeek">Team</label>
 				            	<input type = "text" id="pickTeam" class = "form-control" value="Team" disabled><br />
 				                <label for="pick">Pick</label>

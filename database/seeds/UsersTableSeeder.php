@@ -1,4 +1,4 @@
-<?php
+s<?php
 
 use Illuminate\Database\Seeder;
 
@@ -30,12 +30,19 @@ class UsersTableSeeder extends Seeder
 			$user->save();
         }
 
-        // Required user
+        // Required users
         $user = new \App\User();
         $user->first_name="Jill";
         $user->last_name="";
         $user->email="jill@harvard.edu";
-        $user->password="helloworld";
+        $user->password = \Hash::make('helloworld');
+        $user->save();
+
+        $user = new \App\User();
+        $user->first_name="Jamal";
+        $user->last_name="";
+        $user->email="jamal@harvard.edu";
+        $user->password = \Hash::make('helloworld');
         $user->save();
     }
 }

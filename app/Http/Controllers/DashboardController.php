@@ -10,17 +10,21 @@ use App\Http\Controllers\Controller;
 class DashboardController extends Controller
 {
     public function getIndex() {
-    	
+
         // Get all records in Picks table
-        $picks = \App\Pick::orderBy('week', 'ASC')->get();
-        // dump($picks->toArray()); // for debugging
-
-        $team = $picks->team_id;
+        $teams = \App\Team::with('pick')->orderBy('name', 'ASC')->get();
+        dump($teams->toArray()); // for debugging
         
-        $myPicks = $picks->where('team_id', 7); // UPDATE TO BE LOGGED-IN USER USER ID
-        // dump($myPicks->toArray()); // for debugging
+        $myPicks = $pick->where('id', 7); // UPDATE TO BE LOGGED-IN USER USER ID
+        dump($myPicks); // for debugging
 
-        return view('dashboard')->with('picks', $picks)->with('team', $team)->with('myPicks', $myPicks);
+        // $currentWeek = $picks->last();
+        // echo $current_week->week; // for debugging
+
+        // $teamCount = $currentWeek->team->id;
+        // echo ("Team count is:").$teamCount; // for debugging
+
+        //return view('dashboard')->with('picks', $picks)->with('myPicks', $myPicks)->with('currentWeek', $currentWeek)->with('teamCount', $teamCount);
     }
 
     public function postPick(Request $request) {
