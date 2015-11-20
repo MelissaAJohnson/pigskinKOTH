@@ -36,7 +36,8 @@ Route::get('/team/create', 'TeamController@getCreate');
 Route::post('/team/create', 'TeamController@postCreate');
 
 Route::get('/dashboard/{id?}', 'DashboardController@getIndex');
-Route::post('/dashboard', 'DashboardController@postPick');
+Route::post('/dashboard/pickCreate', 'DashboardController@postPick');
+
 
 
 /*----------------------------------------------------

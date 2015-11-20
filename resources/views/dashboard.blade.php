@@ -117,16 +117,16 @@ such as a page specific stylesheets.
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        	<h4 class="modal-title">Make Pick</h4>
 		      	</div>
-		      	<div class="modal-body">
-		        	<p>Picks must be made no later than Friday, 3PM Central time. If you want to pick a team playing Thursday, the pick must be made before game start.</p>
-		        	<form method="POST" action='/dashboard#makeModal'>
+		      	<form method="POST" action='/dashboard/pickCreate'>
+			      	<div class="modal-body">
+			        	<p>Picks must be made no later than Friday, 3PM Central time. If you want to pick a team playing Thursday, the pick must be made before game start.</p>
 				    	<input type="hidden" value="{{ csrf_token() }}" name="_token">
-				        <fieldset name = "userInformation">
+				        <fieldset name = "pickCreate">
 				            <div class = "form-group">
 				            	<label for="pickWeek">Week</label>
-				            	<input type = "text" id="pickWeek" class = "form-control" value= '{{ $currentWeek->week + 1 }}' disabled><br />
-				            	<label for="pickWeek">Team</label>
-				            	<input type = "text" id="pickTeam" class = "form-control" value="Team" disabled><br />
+				            	<input type = "text" id="pickWeek" name="week" class = "form-control" value= '{{ $currentWeek->week + 1 }}' disabled><br />
+				            	<label for="team">Team</label>
+				            	<input type = "text" id="pickTeam" name="team_id" class = "form-control" value="7" disabled><br />
 				                <label for="pick">Pick</label>
 				                <select id="pick" name="pick" class="form-control">
 			                        <option value="">Select Team</option>
@@ -167,12 +167,13 @@ such as a page specific stylesheets.
 			                    </select>
 				            </div>
 				        </fieldset>
-				    </form>
-		      	</div>
-		      	<div class="modal-footer">
-		        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        	<button type="button" type="submit" id="pickCreate" class="btn btn-primary">Save changes</button>
-		      	</div>
+		      		</div>
+		   		 
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        	<button type="submit" id="pickCreate" class="btn btn-primary">Save changes</button>
+			      	</div>
+		      	</form>
 	    	</div>
 	  	</div>
 	</div>

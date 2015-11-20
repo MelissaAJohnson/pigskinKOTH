@@ -27,12 +27,13 @@ class DashboardController extends Controller
     }
 
     public function postPick(Request $request) {
-    	// Make Pick
+
+        // Make Pick
             // Instantiate a new Pick Model object
             $pick = new \App\Pick();
             
             // Set parameters
-            $pick->week = 8; // UPDATE TO BE LAST WEEK IN PICK +1
+            $pick->week = 4; // UPDATE TO BE LAST WEEK IN PICK +1
             $pick->team_id = 7; // UPDATE TO BE TEAM DETERMINED BY TABLE ROW
             $pick->pick = $request->pick;
 
@@ -41,7 +42,7 @@ class DashboardController extends Controller
         // End make pick
         
         // return view()
-        return redirect('/dashboard/')->with('pick', $pick);
+        return redirect('/dashboard/');
     }
 
 }
