@@ -40,14 +40,24 @@ Route::get('/', function () {
 
 
 // Route::get('/account/create', 'AccountController@getCreate');
-// Route::post('/account/create', 'AccountController@postCreate');
+//Route::post('/account/create', 'AccountController@postCreate');
 
-Route::get('/team/create', 'TeamController@getCreate');
-Route::post('/team/create', 'TeamController@postCreate');
+// Route::get('/team/create', 'TeamController@getCreate');
 
-Route::get('/dashboard/{id?}', 'DashboardController@getIndex');
+// Route::get('/dashboard/{id?}', 'DashboardController@getIndex');
+Route::get('dashboard/{id?}', [
+    'middleware' => 'auth',
+    'uses' => 'DashboardController@getIndex'
+]);
+
 Route::post('/dashboard/pickCreate', 'DashboardController@postPick');
 
+Route::get('/team/create', [
+    'middleware' => 'auth',
+    'uses' => 'TeamController@getCreate'
+]);
+
+Route::post('/team/create', 'TeamController@postCreate');
 
 
 /*----------------------------------------------------

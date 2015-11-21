@@ -17,19 +17,6 @@ such as a page specific styesheets.
 
 @stop
 
-@section('top_nav')
-    <div class="navbar navbar-static-top">
-      <div class="navbar-inner">
-        <div class="container">             
-            <ul class="nav pull-right">
-                <li>
-                    <a href="/login">Login</a>
-                </li>
-            </ul>              
-        </div>
-      </div>
-    </div>
- @stop
 
 @section('content')
 

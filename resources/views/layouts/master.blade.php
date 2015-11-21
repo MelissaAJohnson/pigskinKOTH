@@ -16,17 +16,46 @@
     @yield('head')
 </head>
 
+<nav>
+   @if(\Session::has('flash_message'))
+        <div class="alert alert-warning" role="alert">
+            {{ \Session::get('flash_message') }}
+        </div>
+    @endif
+    
+    <div class="container">
+        @if(Auth::check())
+           <div class="navbar navbar-static-top">
+                <div class="nav navbar-nav navbar-right">             
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle btn-large" data-toggle="dropdown" role="menu" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Account</a></li>
+                            <li><a href="/logout">Sign Off</a></li>
+                        </ul>
+                    </li>     
+                </div>
+            </div>
+        @else
+           <div class="navbar navbar-static-top">
+              <div class="navbar-inner">
+                <div class="container">             
+                    <ul class="nav pull-right">
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                    </ul>              
+                </div>
+              </div>
+            </div>
+        @endif
+    </div>
+</nav>
+
 <body>
 
     <header>
-        
         <div class="container">
-            @if(\Session::has('flash_message'))
-            <div class="alert alert-warning" role="alert">
-                {{ \Session::get('flash_message') }}
-            </div>
-            @endif
-
             @yield('top_nav')
             <h1>Insert Logo Here</h1>
         </div> 
