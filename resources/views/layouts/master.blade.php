@@ -21,6 +21,12 @@
     <header>
         
         <div class="container">
+            @if(\Session::has('flash_message'))
+            <div class="alert alert-warning" role="alert">
+                {{ \Session::get('flash_message') }}
+            </div>
+            @endif
+
             @yield('top_nav')
             <h1>Insert Logo Here</h1>
         </div> 

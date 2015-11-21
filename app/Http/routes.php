@@ -11,6 +11,22 @@
 |
 */
 
+# Show login form
+Route::get('/login', 'Auth\AuthController@getLogin');
+
+# Process login form
+Route::post('/login', 'Auth\AuthController@postLogin');
+
+# Process logout
+Route::get('/logout', 'Auth\AuthController@getLogout');
+
+# Show registration form
+Route::get('/register', 'Auth\AuthController@getRegister');
+
+# Process registration form
+Route::post('/register', 'Auth\AuthController@postRegister');
+
+
 Route::get('/', function () {
 
 	$teams = \App\Team::all();
@@ -23,14 +39,8 @@ Route::get('/', function () {
 });
 
 
-/*
-Route::get('/{user_id}', function($user_id) {
-	return view('dashboard');
-});
-*/
-
-Route::get('/account/create', 'AccountController@getCreate');
-Route::post('/account/create', 'AccountController@postCreate');
+// Route::get('/account/create', 'AccountController@getCreate');
+// Route::post('/account/create', 'AccountController@postCreate');
 
 Route::get('/team/create', 'TeamController@getCreate');
 Route::post('/team/create', 'TeamController@postCreate');
@@ -50,6 +60,21 @@ if(App::environment('local')) {
         DB::statement('DROP database pigskinKOTH');
         DB::statement('CREATE database pigskinKOTH');
         return 'Dropped pigskinKOTH; created pigskinKOTH';
+    });
+
+    Route::get('/confirm-login-worked', function() {
+        # You may access the authenticated user via the Auth facade
+        $user = Auth::user();
+
+        if($user) {
+            echo 'You are logged in.';
+            dump($user->toArray());
+        } else {
+            echo 'You are not logged in.';
+        }
+
+        return;
+
     });
 };
 

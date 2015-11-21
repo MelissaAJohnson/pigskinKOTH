@@ -25,7 +25,7 @@ such as a page specific stylesheets.
 	              	<a href="#" class="dropdown-toggle btn-large" data-toggle="dropdown" role="menu" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <span class="caret"></span></a>
 	              	<ul class="dropdown-menu">
 	                	<li><a href="#">Account</a></li>
-	                	<li><a href="/">Sign Off</a></li>
+	                	<li><a href="/logout">Sign Off</a></li>
 	              	</ul>
             	</li>     
 	        </div>
@@ -66,13 +66,11 @@ such as a page specific stylesheets.
     </table>
 
 
-
-    <!-- <div id="leaguePicksTable"></div> -->
     <h4>League Picks</h4>
 	<table class = 'table table-condensed'>
 		<tr>
     		<th>Team</th>
-    		@for ($i = 1; $i < $currentWeek->week + 1; $i++) <!-- MAKE DYNAMIC -->
+    		@for ($i = 1; $i < $currentWeek->week + 1; $i++) 
     			<th class="text-center">{{ $i }}</th>
     		@endfor 
     		<th></th>
@@ -130,7 +128,7 @@ such as a page specific stylesheets.
 				                <label for="pick">Pick</label>
 				                <select id="pick" name="pick" class="form-control">
 			                        <option value="">Select Team</option>
-			                        <option value="ARZ">Arizona Cardinals (ARZ)</option>
+			                        <option value="ARZ">Arizona Cardinals (ARI)</option>
 			                        <option value="ATL">Atlanta Falcons (ATL)</option>
 			                        <option value="BAL">Baltimore Ravens (BAL)</option>
 			                        <option value="BUF">Buffalo Bills (BUF)</option>

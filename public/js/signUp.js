@@ -58,7 +58,7 @@ window.onload = function () {
     
         
     // This function detects when the user leaves the password field and validates it meets minimum length requirement
-    document.getElementById('password').addEventListener("blur", function () {
+    $('#password').blur (function () {
         var password = document.getElementById('password').value;// grab the password the user entered
         document.getElementById('passwordHint').className = ""; // reset the pwd1Hint class to default (display:none)
         document.getElementById('passwordHint').innerHTML = "";
@@ -71,9 +71,9 @@ window.onload = function () {
     
     
     // This function detects when the user leaves the password confirmation field and validates it matches the initial password
-    document.getElementById('confirmPassword').addEventListener("blur", function() {
+    document.getElementById('password_confirmation').addEventListener("blur", function() {
         var password = document.getElementById('password').value;
-        var confirmPassword = document.getElementById('confirmPassword').value;
+        var confirmPassword = document.getElementById('password_confirmation').value;
         document.getElementById('confirmPasswordHint').className = "";
         document.getElementById('confirmPasswordHint').innerHTML = "";
         if (password != confirmPassword) {
