@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class AccountController extends Controller
 {
     // Responds to requests to GET /account
-    public function getCreate() {
-        return view('account.create');
+    public function getIndex() {
+        $user = Auth::User();
+        return view('account.create')->with('user', $user);
     }
 
     // Responds to requests to POST /account

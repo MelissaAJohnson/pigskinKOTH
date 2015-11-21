@@ -18,16 +18,16 @@ such as a page specific stylesheets.
 
 @section('top_nav')
 	<div class="navbar navbar-static-top">
-	        <div class="nav navbar-nav navbar-right">             
-	            <li class="dropdown">
-	              	<a href="#" class="dropdown-toggle btn-large" data-toggle="dropdown" role="menu" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <span class="caret"></span></a>
-	              	<ul class="dropdown-menu">
-	                	<li><a href="#">Account</a></li>
-	                	<li><a href="/">Sign Off</a></li>
-	              	</ul>
-            	</li>     
-	        </div>
-	    </div>
+        <div class="nav navbar-nav navbar-right">             
+            <li class="dropdown">
+              	<a href="#" class="dropdown-toggle btn-large" data-toggle="dropdown" role="menu" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> <span class="caret"></span></a>
+              	<ul class="dropdown-menu">
+                	<li><a href="#">Account</a></li>
+                	<li><a href="/">Sign Off</a></li>
+              	</ul>
+        	</li>     
+        </div>
+    </div>
 	
 @stop
 

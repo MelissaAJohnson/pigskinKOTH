@@ -30,16 +30,15 @@ Route::post('/register', 'Auth\AuthController@postRegister');
 Route::get('/', function () {
 
 	$teams = \App\Team::all();
-
 	// Teams count
-	$team_count = DB::table('teams')->count();
+	$team_count = $teams->count();
 	$active_count = DB::table('teams')->where('active', '=', 1)->count();
 
     return view('layouts.index')->with("team_count", $team_count)->with("active_count", $active_count);
 });
 
 
-// Route::get('/account/create', 'AccountController@getCreate');
+Route::get('/account', 'AccountController@getIndex');
 //Route::post('/account/create', 'AccountController@postCreate');
 
 // Route::get('/team/create', 'TeamController@getCreate');

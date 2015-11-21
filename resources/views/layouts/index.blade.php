@@ -17,6 +17,13 @@ such as a page specific styesheets.
 
 @stop
 
+@section('top_nav')
+  <div class="navbar navbar-static-top">
+    <div class="nav navbar-nav navbar-right"> 
+        <li><a href="/login">Login</a></li>
+    </div>
+  </div>
+@stop
 
 @section('content')
 

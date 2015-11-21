@@ -12,21 +12,24 @@ Use it to add specific things that *this* View needs in the head,
 such as a page specific stylesheets.
 --}}
 @section('head')
-
+	<link href="/css/navbar-static-top.css" rel="stylesheet">
 
 @stop
 
 @section('top_nav')
 	<div class="navbar navbar-static-top">
-      <div class="navbar-inner">
-        <div class="container">             
-            <ul class="nav pull-right">
-                <li>
-                    <a href="/">Home</a>
-                </li>
-            </ul>              
+        <div class="nav navbar-nav navbar-right">             
+            <li class="dropdown">
+              	<a href="#" class="dropdown-toggle btn-large" data-toggle="dropdown" role="menu" aria-haspopup="true" aria-expanded="false">
+              		{{ $user->first_name  }} {{ $user->last_name }}
+              		<span class="caret"></span>
+              	</a>
+              	<ul class="dropdown-menu">
+                	<li><a href="/dashboard">Dashboard</a></li>
+                	<li><a href="/">Sign Off</a></li>
+              	</ul>
+        	</li>     
         </div>
-      </div>
     </div>
 	
 @stop
@@ -47,7 +50,7 @@ such as a page specific stylesheets.
 	                	id = "firstName" 
 	                	name = "firstName" 
 	                	class = "form-control" 
-	                	placeholder = "First Name"
+	                	value = "{{  $user->first_name }}"
 	                	>
 	            </div>
 	            <div id = "firstNameHint"></div>
@@ -58,7 +61,7 @@ such as a page specific stylesheets.
 	                	id = "lastName" 
 	                	name = "lastName" 
 	                	class = "form-control" 
-	                	placeholder = "Last Name"
+	                	value = "{{ $user->last_name }}"
 	                	>
 	            </div>
 	            <div id = "lastNameHint"></div>
@@ -69,7 +72,7 @@ such as a page specific stylesheets.
 	                	id = "email" 
 	                	name = "email" 
 	                	class = "form-control" 
-	                	placeholder = "Email Address" 
+	                	value = "{{ $user->email }}" 
 	                	required
 	                	>
 	            </div>
@@ -85,7 +88,7 @@ such as a page specific stylesheets.
 	                	id="password" 
 	                	name="password" 
 	                	class = "form-control" 
-	                	placeholder = "Password (8 characters or more)">
+	                	placeholder = "Change Password (8 characters or more)">
 	            </div>
 	            <div id = "passwordHint"></div>
 	            <div class = "form-group">
@@ -114,6 +117,7 @@ Use it to add specific things that *this* View needs at the end of the body,
 such as a page specific JavaScript files.
 --}}
 @section('body')
+	<script type="text/javascript" src="/js/dropdown.js"></script>
 	<script type="text/javascript" src="/js/signUp.js"></script>
 
 @stop

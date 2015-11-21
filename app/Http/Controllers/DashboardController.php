@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class DashboardController extends Controller
 {
     public function getIndex() {
+
+        $user = Auth::User();
 
         // Get all records in Picks table
         $teams = \App\Team::with('pick')->orderBy('name', 'ASC')->get();
@@ -20,10 +23,10 @@ class DashboardController extends Controller
         // dump($picks->toArray()); // for debugging
         // echo $currentWeek->week; // for debugging
 
-        $myPicks = \App\Pick::where('team_id', 7)->get();
-        // dump($myPicks->toArray());
+        $myPicks = $teams->where('user_id', $user->id);
+        // dump($myPicks->toArray()); // for debugging
 
-        return view('dashboard')->with('teams', $teams)->with('currentWeek', $currentWeek)->with('myPicks', $myPicks);
+        return view('dashboard')->with('teams', $teams)->with('currentWeek', $currentWeek)->with('myPicks', $myPicks)->with('user', $user);
     }
 
     public function postPick(Request $request) {

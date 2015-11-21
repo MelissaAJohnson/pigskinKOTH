@@ -13,8 +13,23 @@ such as a page specific stylesheets.
 --}}
 @section('head')
 
-	<link href="/css/navbar-static-top.css" rel="stylesheet">
+@stop
 
+@section('top_nav')
+	<div class="navbar navbar-static-top">
+        <div class="nav navbar-nav navbar-right">             
+            <li class="dropdown">
+              	<a href="#" class="dropdown-toggle btn-large" data-toggle="dropdown" role="menu" aria-haspopup="true" aria-expanded="false">
+              		{{ $user->first_name }} {{ $user->last_name }} 
+              		<span class="caret"></span>
+              	</a>
+              	<ul class="dropdown-menu">
+                	<li><a href="/account">Account</a></li>
+                	<li><a href="/logout">Sign Off</a></li>
+              	</ul>
+        	</li>     
+        </div>
+    </div>
 @stop
 
 
@@ -22,32 +37,34 @@ such as a page specific stylesheets.
 	<h1>Dashboard</h1>
 
 	<!-- Account Owner Pick Table -->
-    <!-- <div id="myPicksTable"></div> -->
 
     <br />
     <h4>My Picks</h4>
     <table class = 'table table-condensed'>	
-		<tr>
-			<th>Team</th>
-			@for ($i = 1; $i < $currentWeek->week + 1; $i++)
-				<th class="text-center">{{ $i }}</th>
-			@endfor 
-			<th></th>
-		</tr>
-		<tr><td>Team 7</td> <!-- Need to figure out how to dynamically populate based on logged in user -->
-	    	@foreach($myPicks as $myPick)
-	    		<td class="text-center">{{ $myPick->pick }}</td>	
-	    	@endforeach
+    	<tr>
+    		<th>Team</th>
+    		@for ($i = 1; $i < $currentWeek->week + 1; $i++) 
+    			<th class="text-center">{{ $i }}</th>
+    		@endfor 
+    		<th></th>
+    	</tr>
 
-	    	<td>
-	    		<button type="button" class="btn btn-default btn-xs">
-	    			<span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editModal"> Edit Pick</span>
-	    		</button>&nbsp;&nbsp;
-	    		<button type="button" class="btn btn-default btn-xs">
-	    			<span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#makeModal"> Make Pick</span>
-	    		</button>
-	    	</td>
-		</tr>
+		@foreach($myPicks as $myPick) 		
+			<tr>
+				<td>{{ $myPick->name }}</td>
+		        	@foreach($myPick->pick as $myPick)
+		            	<td class="text-center">{{ $myPick->pick }}</td>
+		            @endforeach
+	            	<td>
+						<button type="button" class="btn btn-default btn-xs">
+							<span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editModal"> Edit Pick</span>
+						</button>&nbsp;&nbsp;
+						<button type="button" class="btn btn-default btn-xs">
+							<span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#makeModal"> Make Pick</span>
+						</button>
+					</td>
+		    </tr>	  	        	 
+		@endforeach
     </table>
 
 
