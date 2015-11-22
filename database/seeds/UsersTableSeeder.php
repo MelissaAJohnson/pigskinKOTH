@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
 			$user->first_name = $faker->firstName;
 			$user->last_name = $faker->lastName;
 			$user->email = $user->first_name.$user->last_name.'@'.$faker->safeEmailDomain ;
-			$user->password = $faker->password;
+			$user->password = \Hash::make('helloworld');
 
 			# This will generate a new row in the `users` table, with the above data
 			$user->save();

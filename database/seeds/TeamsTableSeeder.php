@@ -14,10 +14,10 @@ class TeamsTableSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         // Add 100 teams to database
-        for ($i=0; $i < 100; $i++) {
+        for ($i=0; $i < 101; $i++) {
 
         	# Generate random number for user_id foreign key
-        	$id = rand(1, 101);
+        	$id = rand(1, 102);
 
         	# Instantiate a new Teams Model object
 			$team = new \App\Team();

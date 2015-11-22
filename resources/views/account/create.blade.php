@@ -39,7 +39,7 @@ such as a page specific stylesheets.
     <p>Information on this page helps identify you and your preferences.</p>
     
     <div class="container">
-	    <form method="POST" action='/account/create'>
+	    <form method="POST" action='/account'>
 	    	<input type="hidden" value="{{ csrf_token() }}" name="_token">
 	        <h3>About You</h3>
 	        <fieldset name = "userInformation">

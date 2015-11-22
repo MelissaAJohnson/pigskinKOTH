@@ -31,13 +31,16 @@ class DashboardController extends Controller
 
     public function postPick(Request $request) {
 
+        $picksWeek = \App\Pick::all()->last();
+        $currentWeek = $picksWeek->week;
+
         // Make Pick
             // Instantiate a new Pick Model object
             $pick = new \App\Pick();
             
             // Set parameters
-            $pick->week = 4; // UPDATE TO BE LAST WEEK IN PICK +1
-            $pick->team_id = 7; // UPDATE TO BE TEAM DETERMINED BY TABLE ROW
+            $pick->week = $currentWeek + 1;
+            $pick->team_id = $request->pick_team_id; 
             $pick->pick = $request->pick;
 
             // This will generate a new row in the `picks` table, with the above data

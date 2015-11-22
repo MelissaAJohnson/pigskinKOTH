@@ -1,9 +1,14 @@
 @extends('layouts.master')
 
+@section('top_nav')
+  <div class="navbar navbar-static-top">
+    <div class="nav navbar-nav navbar-right"> 
+        <li><a href="/">Home</a></li>
+    </div>
+  </div>
+@stop
 
 @section('content')
-
-    <p>Don't have an account? <a href='/register'>Register here...</a></p>
 
     <h1>Login</h1>
 
@@ -35,6 +40,8 @@
         </div>
 
         <button type='submit' class='btn btn-primary'>Login</button>
+        <br /><br /><p>Don't have an account? <a href='/register'>Register here...</a></p>
 
     </form>
+
 @stop

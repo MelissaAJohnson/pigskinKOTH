@@ -17,15 +17,15 @@ class AccountController extends Controller
     }
 
     // Responds to requests to POST /account
-    public function postCreate(Request $request) { 
+    public function postEdit(Request $request) { 
         // Validate fields
         //$this->validate($request, [
         //    'firstName' => 'required|numeric'
         //]);
 
-        // Create user
+        // Edit user
             // Instantiate a new User Model object
-            $user = new \App\User();
+            $user = Auth::User();
             
             // Set parameters
             $user->first_name = $request->firstName;
@@ -35,10 +35,13 @@ class AccountController extends Controller
 
             // This will generate a new row in the `users` table, with the above data
             $user->save();
-        // End create user
+        // End edit user
+
+            \Session::flash('flash_message','Your account was updated');
+        
         
         // return view()
-        return redirect('/team/create')->with('user', $user);
+        return redirect('/dashboard')->with('user', $user);
 
     }
 }

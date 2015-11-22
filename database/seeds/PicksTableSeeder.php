@@ -53,7 +53,7 @@ class PicksTableSeeder extends Seeder
         // Add 3 weeks of picks for each team
 		for ($w=1; $w<4; $w++) {
         	// Loop through each team by id
-        	for ($i=1; $i < 101; $i++) {
+        	for ($i=1; $i < 102; $i++) {
 
         		// Instantiate a new Picks Model object
 				$pick = new \App\Pick();
