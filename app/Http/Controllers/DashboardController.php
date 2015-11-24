@@ -40,7 +40,7 @@ class DashboardController extends Controller
             
             // Set parameters
             $pick->week = $currentWeek+1;
-            $pick->team_id = $request->pick_team_id; 
+            $pick->team_id = $request->makePickTeamId; 
             $pick->pick = $request->pick;
 
             // This will generate a new row in the `picks` table, with the above data

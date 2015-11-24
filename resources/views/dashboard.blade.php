@@ -65,8 +65,14 @@ such as a page specific stylesheets.
 								<span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editModal" style="cursor:pointer; cursor: hand" > Edit Pick</span>
 							</button>
 							&nbsp;&nbsp;
-							<button type="button" id="makePickButton" name="makePickButton" class="btn btn-primary btn-xs" data-id = "{{ $myPick->id }}" data-name = "{{ $myPick->team->name }}">
-									<span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#makeModal" data-toggle="tooltip" title="Click to add next week's pick"> Make Pick</span>
+							<button 
+								type="button" 
+								id="makePickButton" 
+								name="makePickButton" 
+								class="btn btn-primary btn-xs" 
+								data-id = "{{ $myPick->team->id }}" 
+								data-name = "{{ $myPick->team->name }}">
+								<span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#makeModal" data-toggle="tooltip" title="Click to add next week's pick"> Make Pick</span>
 							</button>
 						</td>
 				    </tr>	  	        	 
@@ -81,7 +87,7 @@ such as a page specific stylesheets.
 	<table class = 'table table-condensed'>
 		<tr>
     		<th>Team</th>
-    		@for ($i = 1; $i < $currentWeek->week +1 ; $i++) 
+    		@for ($i = 1; $i < $currentWeek->week + 1; $i++) 
     			<th class="text-center">{{ $i }}</th>
     		@endfor 
     		<th></th>
