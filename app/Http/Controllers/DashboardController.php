@@ -19,7 +19,7 @@ class DashboardController extends Controller
         // dump($teams->toArray()); // for debugging
 
         $picks = \App\Pick::all();
-        $currentWeek = $picks->last();
+        $currentWeek = $picks->last(); // Future functionality will restrict picks to only be future so using last will work
         // dump($picks->toArray()); // for debugging
         // echo $currentWeek->week; // for debugging
 
@@ -39,7 +39,7 @@ class DashboardController extends Controller
             $pick = new \App\Pick();
             
             // Set parameters
-            $pick->week = $currentWeek + 1;
+            $pick->week = $currentWeek+1;
             $pick->team_id = $request->pick_team_id; 
             $pick->pick = $request->pick;
 

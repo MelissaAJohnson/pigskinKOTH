@@ -19,18 +19,18 @@ window.onload = function () {
     })
 
     // This function checks to see if Last Name has been completed
-    $('#lastName').blur (function () {
-        var lastName = document.getElementById('lastName').value;
-        $('#lastNameHint').html ("");
-        if (!lastName) {
-            $('#lastNameHint').addClass ("alert alert-danger");
-            $('#lastNameHint').html ("  Last name is required. There are just too many people in this world with the same first name.");
-            $('#lastNameHint').prepend ("<span class='glyphicon glyphicon-exclamation-sign'></span>");
-        } else {
-            $('#lastNameHint').removeClass ("alert alert-danger");
-            
-        }
-    })
+    // $('#lastName').blur (function () {
+    //    var lastName = document.getElementById('lastName').value;
+    //    $('#lastNameHint').html ("");
+    //    if (!lastName) {
+    //        $('#lastNameHint').addClass ("alert alert-danger");
+    //        $('#lastNameHint').html ("  Last name is required. There are just too many people in this world with the same first name.");
+    //        $('#lastNameHint').prepend ("<span class='glyphicon glyphicon-exclamation-sign'></span>");
+    //    } else {
+    //        $('#lastNameHint').removeClass ("alert alert-danger");
+    //        
+    //    }
+    // })
     
     // This function checks to see if Email has been completed and in the correct format
     $('#email').blur (function () {
@@ -71,7 +71,7 @@ window.onload = function () {
     
     
     // This function detects when the user leaves the password confirmation field and validates it matches the initial password
-    document.getElementById('password_confirmation').addEventListener("blur", function() {
+    $('#password_confirmation').blur (function() {
         var password = document.getElementById('password').value;
         var confirmPassword = document.getElementById('password_confirmation').value;
         document.getElementById('confirmPasswordHint').className = "";

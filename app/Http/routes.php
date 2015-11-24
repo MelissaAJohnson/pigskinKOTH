@@ -45,7 +45,6 @@ Route::get('/account', [
 
 Route::post('/account', 'AccountController@postEdit');
 
-// Route::get('/team/create', 'TeamController@getCreate');
 
 // Route::get('/dashboard/{id?}', 'DashboardController@getIndex');
 Route::get('dashboard/{id?}', [

@@ -43,6 +43,8 @@ class TeamController extends Controller
         // End create user 
             
             // echo $team; // for debugging
+
+            \Session::flash('flash_message','Your team was added');
         
         // return view()
         return redirect('/dashboard/')->with('team', $team)->with('user', $user);
