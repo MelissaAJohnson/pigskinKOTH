@@ -29,6 +29,28 @@ class DashboardController extends Controller
         return view('dashboard')->with('teams', $teams)->with('currentWeek', $currentWeek)->with('myPicks', $myPicks)->with('user', $user);
     }
 
+    public function postEdit(Request $request) {
+        $picksWeek = \App\Pick::all()->last();
+        $currentWeek = $picksWeek->week;
+
+        // Edit Pick
+            // Retrieve Pick to be edited
+            $pick = \App\Pick()->where('id', $request->editPickButton);
+            
+            // Set parameters
+            $pick->week = $currentWeek;
+            $pick->team_id = $request->editPickTeamId; 
+            $pick->pick = $request->pick;
+
+            // This will update the record with the above data
+            $pick->save();
+        // End edit pick
+        
+        // return view()
+        return redirect('/dashboard/');
+
+    }
+
     public function postPick(Request $request) {
 
         $picksWeek = \App\Pick::all()->last();

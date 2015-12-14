@@ -32,11 +32,11 @@
             @yield('top_nav')
             @if(Auth::check())
                 <a href="/dashboard">
-                    <h1>Insert Logo Here</h1>
+                    <h1>Pigskin King of the Hill</h1>
                 </a>
             @else
                 <a href="/">
-                    <h1>Insert Logo Here</h1>
+                    <h1>Pigskin King of the Hill/h1>
                 </a>
             @endif
         </div> 

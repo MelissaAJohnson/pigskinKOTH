@@ -41,7 +41,7 @@ such as a page specific stylesheets.
     <br />
     <h3>My Picks</h3>
     
-    	@if(count($myPicks) < 1)
+    	@if (count($myPicks) < 1)
     		<h4>Create a team to play!</h4>
     		<p>When you add a team and make picks, your picks will show here</p>
     		<a href="/team/create"><span class="glyphicon glyphicon-plus"></span> Add Team</a>
@@ -61,8 +61,14 @@ such as a page specific stylesheets.
 			            	<td class="text-center">{{ $myPick->pick }}</td>
 			            @endforeach
 		            	<td>
-							<button type="button" class="btn btn-default btn-xs">
-								<span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editModal" style="cursor:pointer; cursor: hand" > Edit Pick</span>
+							<button 
+								type="button" 
+								id="editPickButton"
+								name="editPickButton"
+								class="btn btn-default btn-xs"
+								data-id = "{{ $myPick->team->id }}"
+								data-name = "{{ $myPick->team->name }}">
+								<span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editModal" data-toggle="tooltip" title="Click to edit last pick"> Edit Pick</span>
 							</button>
 							&nbsp;&nbsp;
 							<button 
@@ -78,7 +84,7 @@ such as a page specific stylesheets.
 				    </tr>	  	        	 
 				@endforeach
 			</table>
-			<a href="/team/create"><span class="glyphicon glyphicon-plus"></span> Add Another Team</a>
+			<!-- <a href="/team/create"><span class="glyphicon glyphicon-plus"></span> Add Another Team</a> -->
 		@endif
     
 
@@ -113,18 +119,19 @@ such as a page specific stylesheets.
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        	<h4 class="modal-title">Edit Pick</h4>
 		      	</div>
-		      	<form method="POST" action='/dashboard/pickCreate'>
+		      	<form method="POST" action='/dashboard/pickEdit'>
 			      	<div class="modal-body">
 			        	<p>Picks must be made no later than Friday, 3PM Central time. If you want to pick a team playing Thursday, the pick must be made before game start.</p>
 				    	<input type="hidden" value="{{ csrf_token() }}" name="_token">
+				    	<input type = "hidden" id="editPickTeamId" name="editPickTeamId"><br />
 			            <div class = "form-group">
 			            	<label for="pickWeek">Week</label>
-			            	<input type = "text" id="pickWeek" name="myPickWeek" class = "form-control" value= '4' disabled><br />
+			            	<input type = "text" id="editPickWeek" name="editPickWeek" class = "form-control" value= "{{ $myPick->week }}" disabled><br />
 			            	<label for="team">Team</label>
 			            	<input type = "hidden" id="editPickTeamId" name="editPickTeamId"><br />
 			            	<input type = "text" id="editPickTeamName" name="editPickTeamName" class = "form-control" disabled><br />
 			                <label for="pick">Pick</label>
-			                <select id="pick" name="pick" class="form-control" value="">
+			                <select id="pick" name="pick" class="form-control">
 		                        <option value="">Select Team</option>
 		                        <option value="ARI">Arizona Cardinals (ARI)</option>
 		                        <option value="ATL">Atlanta Falcons (ATL)</option>
@@ -165,7 +172,7 @@ such as a page specific stylesheets.
 		   		 
 			      	<div class="modal-footer">
 			        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        	<button type="submit" id="pickCreate" class="btn btn-primary">Save changes</button>
+			        	<button type="submit" id="pickEdit" class="btn btn-primary">Save changes</button>
 			      	</div>
 		      	</form>
 	    	</div>
@@ -182,7 +189,7 @@ such as a page specific stylesheets.
 		      	</div>
 		      	<form method="POST" action='/dashboard/pickCreate'>
 		      		<input type='hidden' value='{{ csrf_token() }}' name='_token'>
-		      		<input type='hidden' name='edit_team_id' value=''>
+		      		<!-- <input type='hidden' name='edit_team_id' value=''> -->
 			      	<div class="modal-body">
 			        	<p>Picks must be made no later than Friday, 3PM Central time. If you want to pick a team playing Thursday, the pick must be made before game start.</p>
 				    	<input type="hidden" value="{{ csrf_token() }}" name="_token">

@@ -26,7 +26,7 @@ such as a page specific stylesheets.
               	</a>
               	<ul class="dropdown-menu">
                 	<li><a href="/dashboard">Dashboard</a></li>
-                	<li><a href="/">Sign Off</a></li>
+                	<li><a href="/logout">Sign Off</a></li>
               	</ul>
         	</li>     
         </div>

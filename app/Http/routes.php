@@ -45,14 +45,13 @@ Route::get('/account', [
 
 Route::post('/account', 'AccountController@postEdit');
 
-
-// Route::get('/dashboard/{id?}', 'DashboardController@getIndex');
 Route::get('dashboard/{id?}', [
     'middleware' => 'auth',
     'uses' => 'DashboardController@getIndex'
 ]);
 
 Route::post('/dashboard/pickCreate', 'DashboardController@postPick');
+Route::post('/dashboard/pickEdit', 'DashboardController@postEdit');
 
 Route::get('/team/create', [
     'middleware' => 'auth',
