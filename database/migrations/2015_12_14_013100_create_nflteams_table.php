@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePicksTable extends Migration
+class CreateNflteamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreatePicksTable extends Migration
      */
     public function up()
     {
-        Schema::create('picks', function (Blueprint $table) {
+        Schema::create('nflteams', function (Blueprint $table) {
             # Increments method will make a Primary, Auto-Incrementing field.
             # Most tables start off this way
             $table->increments('id');
@@ -22,13 +22,10 @@ class CreatePicksTable extends Migration
             $table->timestamps();
 
             # The rest of the fields...
-            $table->string('pick');
-            $table->integer('week');
-            $table->boolean('pick_loss');
-
-            $table->integer('team_id')->unsigned();
-            $table->foreign('team_id')->references('id')->on('teams');
+            $table->string('name');
+            $table->string('abbreviation');
         });
+
     }
 
     /**

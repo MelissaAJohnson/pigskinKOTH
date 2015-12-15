@@ -23,10 +23,18 @@ class DashboardController extends Controller
         // dump($picks->toArray()); // for debugging
         // echo $currentWeek->week; // for debugging
 
+        // Get NFL teams for picks dropdown
+        $pickTeams = new \App\Nflteam();
+        $teams_for_dropdown = $pickTeams->getTeamsForDropdown();
+
+        $nflteams = \App\Nflteam::with('pick')->get();
+        // dump($nflteams->toArray());
+
+        // $myPicks = \App\Pick::with('nflteam')->get();
         $myPicks = $teams->where('user_id', $user->id);
         // dump($myPicks->toArray()); // for debugging
 
-        return view('dashboard')->with('teams', $teams)->with('currentWeek', $currentWeek)->with('myPicks', $myPicks)->with('user', $user);
+        return view('dashboard')->with([ 'teams'=>$teams, 'teams_for_dropdown'=>$teams_for_dropdown, 'picks'=>$picks, 'nflteams'=>$nflteams, 'currentWeek'=>$currentWeek, 'myPicks'=>$myPicks, 'user'=>$user ]);
     }
 
     public function postEdit(Request $request) {
@@ -63,7 +71,7 @@ class DashboardController extends Controller
             // Set parameters
             $pick->week = $currentWeek+1;
             $pick->team_id = $request->makePickTeamId; 
-            $pick->pick = $request->pick;
+            $pick->nflteam_id = $request->pick;
 
             // This will generate a new row in the `picks` table, with the above data
             $pick->save();

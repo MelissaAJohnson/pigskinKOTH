@@ -48,7 +48,7 @@ class PicksTableSeeder extends Seeder
 
 			);
 
-			$new_pick = "";
+			// $new_pick = "";
 
         // Add 3 weeks of picks for each team
 		for ($w=1; $w<4; $w++) {
@@ -59,11 +59,13 @@ class PicksTableSeeder extends Seeder
 				$pick = new \App\Pick();
 
         		// Randomly select from pick list for pick
-				$r = rand(0,31); 
-				$new_pick = $new_pick.$team_codes[$r];
+				// $r = rand(0,31); 
+				// $new_pick = $new_pick.$team_codes[$r];
+				// Generate random number for pick
+				// $id = rand(1,32);
 
     			// Set parameters
-				$pick->pick = $new_pick;
+				$pick->nflteam_id = rand(1,32);
 				$pick->week = $w;
 				$pick->pick_loss = rand(0,1);
 				$pick->team_id = $i;
@@ -72,7 +74,7 @@ class PicksTableSeeder extends Seeder
 				$pick->save();
 
 				// Clear pick value
-				$new_pick = "";
+				// $new_pick = "";
 			}
     	}
     }

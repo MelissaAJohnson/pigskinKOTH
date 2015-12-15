@@ -10,12 +10,12 @@ $(document).ready(function(){
 	});
 
 	$(document).on("click", "#editPickButton", function () {
-		var myTeamId = $(this).data('id');
 		var myTeamName = $(this).data('name');
-		console.log(myTeamId);
+		var myTeamPick = $(this).data('pick');
 		console.log(myTeamName);
-		$(".modal-body #editPickTeamId").val(myTeamId);
+		console.log(myTeamPick);
 		$(".modal-body #editPickTeamName").val(myTeamName);
+		$(".modal-body #editPickTeamPick").val(myTeamPick);
 	});
 
 });

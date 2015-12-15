@@ -36,7 +36,7 @@
                 </a>
             @else
                 <a href="/">
-                    <h1>Pigskin King of the Hill/h1>
+                    <h1>Pigskin King of the Hill</h1>
                 </a>
             @endif
         </div> 

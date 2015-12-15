@@ -11,4 +11,11 @@ class Pick extends Model
         # Define an inverse one-to-many relationship.
         return $this->belongsTo('\App\Team');
     }
+
+    public function nflteam() {
+        # Pick belongs to Nflteam
+        # Define an inverse one-to-many relationship.
+        return $this->belongsTo('\App\Nflteam');
+    }
+
 }

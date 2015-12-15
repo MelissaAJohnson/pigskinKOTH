@@ -58,7 +58,7 @@ such as a page specific stylesheets.
 					<tr>
 						<td>{{ $myPick->name }}</td>
 			        	@foreach($myPick->pick as $myPick)
-			            	<td class="text-center">{{ $myPick->pick }}</td>
+			            	<td class="text-center">{{ $myPick->nflteam->abbreviation }}</td>
 			            @endforeach
 		            	<td>
 							<button 
@@ -66,8 +66,8 @@ such as a page specific stylesheets.
 								id="editPickButton"
 								name="editPickButton"
 								class="btn btn-default btn-xs"
-								data-id = "{{ $myPick->team->id }}"
-								data-name = "{{ $myPick->team->name }}">
+								data-name = "{{ $myPick->team->name }}"
+								data-pick = "{{ $myPick->nflteam->abbreviation }}">
 								<span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editModal" data-toggle="tooltip" title="Click to edit last pick"> Edit Pick</span>
 							</button>
 							&nbsp;&nbsp;
@@ -103,7 +103,7 @@ such as a page specific stylesheets.
 				<tr>
 					<td>{{ $team->name }}</td>
 			        	@foreach($team->pick as $pick)
-			            	<td class="text-center">{{ $pick->pick }}</td>
+			            	<td class="text-center">{{ $pick->nflteam->abbreviation}}</td>
 			            @endforeach
 	
 		        </tr>	  	        	 
@@ -123,15 +123,15 @@ such as a page specific stylesheets.
 			      	<div class="modal-body">
 			        	<p>Picks must be made no later than Friday, 3PM Central time. If you want to pick a team playing Thursday, the pick must be made before game start.</p>
 				    	<input type="hidden" value="{{ csrf_token() }}" name="_token">
-				    	<input type = "hidden" id="editPickTeamId" name="editPickTeamId"><br />
 			            <div class = "form-group">
 			            	<label for="pickWeek">Week</label>
-			            	<input type = "text" id="editPickWeek" name="editPickWeek" class = "form-control" value= "{{ $myPick->week }}" disabled><br />
+			            	<input type = "text" id="editPickWeek" name="editPickWeek" class = "form-control" value= "3" disabled><br />
 			            	<label for="team">Team</label>
-			            	<input type = "hidden" id="editPickTeamId" name="editPickTeamId"><br />
 			            	<input type = "text" id="editPickTeamName" name="editPickTeamName" class = "form-control" disabled><br />
 			                <label for="pick">Pick</label>
-			                <select id="pick" name="pick" class="form-control">
+		                    <input type = "text" id="editPickTeamPick" name="editPickTeamPick" class = "form-control">
+
+			                <!-- <select id="pick" name="pick" class="form-control">
 		                        <option value="">Select Team</option>
 		                        <option value="ARI">Arizona Cardinals (ARI)</option>
 		                        <option value="ATL">Atlanta Falcons (ATL)</option>
@@ -166,7 +166,7 @@ such as a page specific stylesheets.
 		                        <option value="TB">Tampa Bay Buccaneers (TB)</option>
 		                        <option value="TEN">Tennessee Titans (TEN)</option>
 		                        <option value="WA">Washington Redskins (WA)</option>
-		                    </select>
+		                    </select> -->
 			            </div>
 		      		</div>
 		   		 
@@ -202,39 +202,38 @@ such as a page specific stylesheets.
 			                <label for="pick">Pick</label>
 			                <select id="pick" name="pick" class="form-control">
 		                        <option value="">Select Team</option>
-		                        <option value="ARI">Arizona Cardinals (ARI)</option>
-		                        <option value="ATL">Atlanta Falcons (ATL)</option>
-		                        <option value="BAL">Baltimore Ravens (BAL)</option>
-		                        <option value="BUF">Buffalo Bills (BUF)</option>
-		                        <option value="CAR">Carolina Panthers (CAR)</option>
-		                        <option value="CHI">Chicago Bears (CHI)</option>
-		                        <option value="CIN">Cincinnati Bengels (CIN)</option>
-		                        <option value="CLE">Cleveland Browns (CLE)</option>
-		                        <option value="DAL">Dallas Cowboys (DAL)</option>
-		                        <option value="DEN">Denver Broncos (DEN)</option>
-		                        <option value="DET">Detroit Lions (DET)</option>
-		                        <option value="ATL">Atlanta Falcons (ATL)</option>
-		                        <option value="GB">Green Bay Packers (GB)</option>
-		                        <option value="HOU">Houston Texans (HOU)</option>
-		                        <option value="IND">Indianapolis Colts (IND)</option>
-		                        <option value="JAC">Jacksonville Jaguars (JAC)</option>
-		                        <option value="KAN">Kansas City Chiefs (KAN)</option>
-		                        <option value="MIA">Miami Dolphins (MIA)</option>
-		                        <option value="MIN">Minnesota Vikings (MIN)</option>
-		                        <option value="NE">New England Patriots (NE)</option>
-		                        <option value="NO">New Orleans Saints (NO)</option>
-		                        <option value="NYG">New York Giants (NYG)</option>
-		                        <option value="NYJ">New York Jets(NYJ)</option>
-		                        <option value="OAK">Oakland Raiders (OAK)</option>
-		                        <option value="PHI">Philadelphia Eagles (PHI)</option>
-		                        <option value="PIT">Pittsburgh Steelers (PIT)</option>
-		                        <option value="STL">Saint Louis Rams (STL)</option>
-		                        <option value="SD">San Diego Chargers (SD)</option>
-		                        <option value="SF">San Francisco 49ers (SF)</option>
-		                        <option value="SEA">Seattle Seahawks (SEA)</option>
-		                        <option value="TB">Tampa Bay Buccaneers (TB)</option>
-		                        <option value="TEN">Tennessee Titans (TEN)</option>
-		                        <option value="WA">Washington Redskins (WA)</option>
+		                        <option value="1">Arizona Cardinals (ARI)</option>
+		                        <option value="2">Atlanta Falcons (ATL)</option>
+		                        <option value="3">Baltimore Ravens (BAL)</option>
+		                        <option value="4">Buffalo Bills (BUF)</option>
+		                        <option value="5">Carolina Panthers (CAR)</option>
+		                        <option value="6">Chicago Bears (CHI)</option>
+		                        <option value="7">Cincinnati Bengels (CIN)</option>
+		                        <option value="8">Cleveland Browns (CLE)</option>
+		                        <option value="9">Dallas Cowboys (DAL)</option>
+		                        <option value="10">Denver Broncos (DEN)</option>
+		                        <option value="11">Detroit Lions (DET)</option>
+		                        <option value="12">Green Bay Packers (GB)</option>
+		                        <option value="13">Houston Texans (HOU)</option>
+		                        <option value="14">Indianapolis Colts (IND)</option>
+		                        <option value="15">Jacksonville Jaguars (JAC)</option>
+		                        <option value="16">Kansas City Chiefs (KAN)</option>
+		                        <option value="17">Miami Dolphins (MIA)</option>
+		                        <option value="18">Minnesota Vikings (MIN)</option>
+		                        <option value="19">New England Patriots (NE)</option>
+		                        <option value="20">New Orleans Saints (NO)</option>
+		                        <option value="21">New York Giants (NYG)</option>
+		                        <option value="22">New York Jets(NYJ)</option>
+		                        <option value="23">Oakland Raiders (OAK)</option>
+		                        <option value="24">Philadelphia Eagles (PHI)</option>
+		                        <option value="25">Pittsburgh Steelers (PIT)</option>
+		                        <option value="26">Saint Louis Rams (STL)</option>
+		                        <option value="27">San Diego Chargers (SD)</option>
+		                        <option value="28">San Francisco 49ers (SF)</option>
+		                        <option value="29">Seattle Seahawks (SEA)</option>
+		                        <option value="30">Tampa Bay Buccaneers (TB)</option>
+		                        <option value="31">Tennessee Titans (TEN)</option>
+		                        <option value="32">Washington Redskins (WA)</option>
 		                    </select>
 			            </div>
 		      		</div>
