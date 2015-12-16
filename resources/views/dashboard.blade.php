@@ -49,7 +49,7 @@ such as a page specific stylesheets.
 	    	<table class = 'table table-condensed'>	
 		    	<tr>
 		    		<th>Team</th>
-		    		@for ($i = 1; $i < $currentWeek->week + 1; $i++) 
+		    		@for ($i = 1; $i < $currentWeek + 1; $i++) 
 		    			<th class="text-center">{{ $i }}</th>
 		    		@endfor 
 		    		<th></th>
@@ -66,9 +66,18 @@ such as a page specific stylesheets.
 								id="editPickButton"
 								name="editPickButton"
 								class="btn btn-default btn-xs"
+								data-nonsence = "{{ $myPick->id }}"
+								data-id = "{{ $myPick->team->id }}"
 								data-name = "{{ $myPick->team->name }}"
-								data-pick = "{{ $myPick->nflteam->abbreviation }}">
-								<span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editModal" data-toggle="tooltip" title="Click to edit last pick"> Edit Pick</span>
+								data-pick = "{{ $myPick->nflteam->id }}">
+								<span 
+									class="glyphicon glyphicon-pencil" 
+									data-toggle="modal" 
+									data-target="#editModal" 
+									data-toggle="tooltip" 
+									title="Click to edit last pick">
+									Edit Pick
+								</span>
 							</button>
 							&nbsp;&nbsp;
 							<button 
@@ -78,7 +87,14 @@ such as a page specific stylesheets.
 								class="btn btn-primary btn-xs" 
 								data-id = "{{ $myPick->team->id }}" 
 								data-name = "{{ $myPick->team->name }}">
-								<span class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#makeModal" data-toggle="tooltip" title="Click to add next week's pick"> Make Pick</span>
+								<span 
+									class="glyphicon glyphicon-plus" 
+									data-toggle="modal" 
+									data-target="#makeModal" 
+									data-toggle="tooltip" 
+									title="Click to add next week's pick"> 
+									Make Pick
+								</span>
 							</button>
 						</td>
 				    </tr>	  	        	 
@@ -93,7 +109,7 @@ such as a page specific stylesheets.
 	<table class = 'table table-condensed'>
 		<tr>
     		<th>Team</th>
-    		@for ($i = 1; $i < $currentWeek->week + 1; $i++) 
+    		@for ($i = 1; $i < $currentWeek + 1; $i++) 
     			<th class="text-center">{{ $i }}</th>
     		@endfor 
     		<th></th>
@@ -124,49 +140,23 @@ such as a page specific stylesheets.
 			        	<p>Picks must be made no later than Friday, 3PM Central time. If you want to pick a team playing Thursday, the pick must be made before game start.</p>
 				    	<input type="hidden" value="{{ csrf_token() }}" name="_token">
 			            <div class = "form-group">
+			            	<input type = "hidden" id="editPickId" name="editPickId">
 			            	<label for="pickWeek">Week</label>
-			            	<input type = "text" id="editPickWeek" name="editPickWeek" class = "form-control" value= "3" disabled><br />
+			            	<input type = "text" id="editPickWeek" name="editPickWeek" class = "form-control" value= "{{ $currentWeek }}" disabled><br />
 			            	<label for="team">Team</label>
+			            	<input type = "hidden" id="editPickTeamId" name="editPickTeamId">
 			            	<input type = "text" id="editPickTeamName" name="editPickTeamName" class = "form-control" disabled><br />
 			                <label for="pick">Pick</label>
-		                    <input type = "text" id="editPickTeamPick" name="editPickTeamPick" class = "form-control">
+                           	<select name='pick' id='pick' class='form-control'>
+				                @foreach($teams_for_dropdown as $nflteam_id => $nflteam_name)
 
-			                <!-- <select id="pick" name="pick" class="form-control">
-		                        <option value="">Select Team</option>
-		                        <option value="ARI">Arizona Cardinals (ARI)</option>
-		                        <option value="ATL">Atlanta Falcons (ATL)</option>
-		                        <option value="BAL">Baltimore Ravens (BAL)</option>
-		                        <option value="BUF">Buffalo Bills (BUF)</option>
-		                        <option value="CAR">Carolina Panthers (CAR)</option>
-		                        <option value="CHI">Chicago Bears (CHI)</option>
-		                        <option value="CIN">Cincinnati Bengels (CIN)</option>
-		                        <option value="CLE">Cleveland Browns (CLE)</option>
-		                        <option value="DAL">Dallas Cowboys (DAL)</option>
-		                        <option value="DEN">Denver Broncos (DEN)</option>
-		                        <option value="DET">Detroit Lions (DET)</option>
-		                        <option value="ATL">Atlanta Falcons (ATL)</option>
-		                        <option value="GB">Green Bay Packers (GB)</option>
-		                        <option value="HOU">Houston Texans (HOU)</option>
-		                        <option value="IND">Indianapolis Colts (IND)</option>
-		                        <option value="JAC">Jacksonville Jaguars (JAC)</option>
-		                        <option value="KAN">Kansas City Chiefs (KAN)</option>
-		                        <option value="MIA">Miami Dolphins (MIA)</option>
-		                        <option value="MIN">Minnesota Vikings (MIN)</option>
-		                        <option value="NE">New England Patriots (NE)</option>
-		                        <option value="NO">New Orleans Saints (NO)</option>
-		                        <option value="NYG">New York Giants (NYG)</option>
-		                        <option value="NYJ">New York Jets(NYJ)</option>
-		                        <option value="OAK">Oakland Raiders (OAK)</option>
-		                        <option value="PHI">Philadelphia Eagles (PHI)</option>
-		                        <option value="PIT">Pittsburgh Steelers (PIT)</option>
-		                        <option value="STL">Saint Louis Rams (STL)</option>
-		                        <option value="SD">San Diego Chargers (SD)</option>
-		                        <option value="SF">San Francisco 49ers (SF)</option>
-		                        <option value="SEA">Seattle Seahawks (SEA)</option>
-		                        <option value="TB">Tampa Bay Buccaneers (TB)</option>
-		                        <option value="TEN">Tennessee Titans (TEN)</option>
-		                        <option value="WA">Washington Redskins (WA)</option>
-		                    </select> -->
+				                    {{ $selected = ($nflteam_id == $myPick->id) ? 'selected' : '' }}
+
+				                    <option value='{{ $nflteam_id }}' {{ $selected }}> {{ $nflteam_name }} </option>
+				                @endforeach
+				            </select>
+
+
 			            </div>
 		      		</div>
 		   		 
@@ -195,7 +185,7 @@ such as a page specific stylesheets.
 				    	<input type="hidden" value="{{ csrf_token() }}" name="_token">
 			            <div class = "form-group">
 			            	<label for="pickWeek">Week</label>
-			            	<input type = "text" class = "form-control" id="pickWeek" name="pick_week" value= "{{ $currentWeek->week + 1 }}" disabled><br />
+			            	<input type = "text" class = "form-control" id="pickWeek" name="pick_week" value= "{{ $currentWeek + 1 }}" disabled><br />
 			            	<label for="team">Team</label>
 			            	<input type = "hidden" id="makePickTeamId" name="makePickTeamId"><br />
 			            	<input type = "text" id="makePickTeamName" name="makePickTeamName" class = "form-control" disabled><br />

@@ -19,13 +19,13 @@ class DashboardController extends Controller
         // dump($teams->toArray()); // for debugging
 
         $picks = \App\Pick::all();
-        $currentWeek = $picks->last(); // Future functionality will restrict picks to only be future so using last will work
+        $currentWeek = 1; // Future functionality will restrict picks to only be future so using last will work
         // dump($picks->toArray()); // for debugging
         // echo $currentWeek->week; // for debugging
 
-        // Get NFL teams for picks dropdown
-        $pickTeams = new \App\Nflteam();
-        $teams_for_dropdown = $pickTeams->getTeamsForDropdown();
+        $nflteamModel = new \App\Nflteam();
+        $teams_for_dropdown = $nflteamModel->getTeamsForDropdown();
+        // dump($teams_for_dropdown);
 
         $nflteams = \App\Nflteam::with('pick')->get();
         // dump($nflteams->toArray());
@@ -34,21 +34,22 @@ class DashboardController extends Controller
         $myPicks = $teams->where('user_id', $user->id);
         // dump($myPicks->toArray()); // for debugging
 
-        return view('dashboard')->with([ 'teams'=>$teams, 'teams_for_dropdown'=>$teams_for_dropdown, 'picks'=>$picks, 'nflteams'=>$nflteams, 'currentWeek'=>$currentWeek, 'myPicks'=>$myPicks, 'user'=>$user ]);
+        return view('dashboard')->with([ 'teams'=>$teams, 'picks'=>$picks, 'nflteams'=>$nflteams, 'currentWeek'=>$currentWeek, 'myPicks'=>$myPicks, 'user'=>$user, 'teams_for_dropdown'=>$teams_for_dropdown]);
     }
 
     public function postEdit(Request $request) {
-        $picksWeek = \App\Pick::all()->last();
-        $currentWeek = $picksWeek->week;
+
+        $currentWeek = 1;
 
         // Edit Pick
             // Retrieve Pick to be edited
-            $pick = \App\Pick()->where('id', $request->editPickButton);
+            $pick = \App\Pick::find($request->editPickId);
+            // dump($pick);
             
             // Set parameters
             $pick->week = $currentWeek;
             $pick->team_id = $request->editPickTeamId; 
-            $pick->pick = $request->pick;
+            $pick->nflteam_id = $request->pick;
 
             // This will update the record with the above data
             $pick->save();
@@ -61,8 +62,7 @@ class DashboardController extends Controller
 
     public function postPick(Request $request) {
 
-        $picksWeek = \App\Pick::all()->last();
-        $currentWeek = $picksWeek->week;
+        $currentWeek = 3;
 
         // Make Pick
             // Instantiate a new Pick Model object

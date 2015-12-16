@@ -11,49 +11,12 @@ class PicksTableSeeder extends Seeder
      */
     public function run()
     {
-        // Create pick list
-			$team_codes = array(
-				"ATL",
-				"ARI",
-				"BAL",
-				"BUF",
-				"CAR",
-				"CHI",
-				"CIN",
-				"CLE",
-				"DAL",
-				"DEN",
-				"DET",
-				"GB",
-				"HOU",
-				"IND",
-				"JAX",
-				"KC",
-				"MIA",
-				"MIN",
-				"NE",
-				"NO",
-				"NYG",
-				"NYJ",
-				"OAK",
-				"PHI",
-				"PIT",
-				"SD",
-				"SEA",
-				"SF",
-				"STL",
-				"TB",
-				"TEN",
-				"WAS",
 
-			);
-
-			// $new_pick = "";
 
         // Add 3 weeks of picks for each team
-		for ($w=1; $w<4; $w++) {
+		for ($w=1; $w<2; $w++) {
         	// Loop through each team by id
-        	for ($i=1; $i < 102; $i++) {
+        	for ($i=1; $i < 106; $i++) {
 
         		// Instantiate a new Picks Model object
 				$pick = new \App\Pick();
