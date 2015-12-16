@@ -54,6 +54,7 @@ such as a page specific stylesheets.
 		    		@endfor 
 		    		<th></th>
 		    	</tr>
+		    	<!-- Insert logic for no picks here -->
 				@foreach($myPicks as $myPick) 		
 					<tr>
 						<td>{{ $myPick->name }}</td>
@@ -149,11 +150,8 @@ such as a page specific stylesheets.
 			                <label for="pick">Pick</label>
                            	<select name='pick' id='pick' class='form-control'>
 				                @foreach($teams_for_dropdown as $nflteam_id => $nflteam_name)
-
-				                    {{ $selected = ($nflteam_id == $myPick->id) ? 'selected' : '' }}
-
-				                    <option value='{{ $nflteam_id }}' {{ $selected }}> {{ $nflteam_name }} </option>
-				                @endforeach
+			                		<option value='{{ $nflteam_id }}'> {{ $nflteam_name }} </option>
+		                		@endforeach
 				            </select>
 
 
@@ -190,41 +188,11 @@ such as a page specific stylesheets.
 			            	<input type = "hidden" id="makePickTeamId" name="makePickTeamId"><br />
 			            	<input type = "text" id="makePickTeamName" name="makePickTeamName" class = "form-control" disabled><br />
 			                <label for="pick">Pick</label>
-			                <select id="pick" name="pick" class="form-control">
-		                        <option value="">Select Team</option>
-		                        <option value="1">Arizona Cardinals (ARI)</option>
-		                        <option value="2">Atlanta Falcons (ATL)</option>
-		                        <option value="3">Baltimore Ravens (BAL)</option>
-		                        <option value="4">Buffalo Bills (BUF)</option>
-		                        <option value="5">Carolina Panthers (CAR)</option>
-		                        <option value="6">Chicago Bears (CHI)</option>
-		                        <option value="7">Cincinnati Bengels (CIN)</option>
-		                        <option value="8">Cleveland Browns (CLE)</option>
-		                        <option value="9">Dallas Cowboys (DAL)</option>
-		                        <option value="10">Denver Broncos (DEN)</option>
-		                        <option value="11">Detroit Lions (DET)</option>
-		                        <option value="12">Green Bay Packers (GB)</option>
-		                        <option value="13">Houston Texans (HOU)</option>
-		                        <option value="14">Indianapolis Colts (IND)</option>
-		                        <option value="15">Jacksonville Jaguars (JAC)</option>
-		                        <option value="16">Kansas City Chiefs (KAN)</option>
-		                        <option value="17">Miami Dolphins (MIA)</option>
-		                        <option value="18">Minnesota Vikings (MIN)</option>
-		                        <option value="19">New England Patriots (NE)</option>
-		                        <option value="20">New Orleans Saints (NO)</option>
-		                        <option value="21">New York Giants (NYG)</option>
-		                        <option value="22">New York Jets(NYJ)</option>
-		                        <option value="23">Oakland Raiders (OAK)</option>
-		                        <option value="24">Philadelphia Eagles (PHI)</option>
-		                        <option value="25">Pittsburgh Steelers (PIT)</option>
-		                        <option value="26">Saint Louis Rams (STL)</option>
-		                        <option value="27">San Diego Chargers (SD)</option>
-		                        <option value="28">San Francisco 49ers (SF)</option>
-		                        <option value="29">Seattle Seahawks (SEA)</option>
-		                        <option value="30">Tampa Bay Buccaneers (TB)</option>
-		                        <option value="31">Tennessee Titans (TEN)</option>
-		                        <option value="32">Washington Redskins (WA)</option>
-		                    </select>
+			                <select name='pick' id='pick' class='form-control'>
+			                	@foreach($teams_for_dropdown as $nflteam_id => $nflteam_name)
+			                		<option value='{{ $nflteam_id }}'> {{ $nflteam_name }} </option>
+		                		@endforeach
+		                	</select>
 			            </div>
 		      		</div>
 		   		 
