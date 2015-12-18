@@ -47,59 +47,89 @@ such as a page specific stylesheets.
     		<a href="/team/create"><span class="glyphicon glyphicon-plus"></span> Add Team</a>
     	@else
 	    	<table class = 'table table-condensed'>	
-		    	<tr>
-		    		<th>Team</th>
-		    		@for ($i = 1; $i < $currentWeek + 1; $i++) 
-		    			<th class="text-center">{{ $i }}</th>
-		    		@endfor 
-		    		<th></th>
-		    	</tr>
-		    	<!-- Insert logic for no picks here -->
-				@foreach($myPicks as $myPick) 		
-					<tr>
-						<td>{{ $myPick->name }}</td>
-			        	@foreach($myPick->pick as $myPick)
-			            	<td class="text-center">{{ $myPick->nflteam->abbreviation }}</td>
-			            @endforeach
-		            	<td>
-							<button 
-								type="button" 
-								id="editPickButton"
-								name="editPickButton"
-								class="btn btn-default btn-xs"
-								data-nonsence = "{{ $myPick->id }}"
-								data-id = "{{ $myPick->team->id }}"
-								data-name = "{{ $myPick->team->name }}"
-								data-pick = "{{ $myPick->nflteam->id }}">
-								<span 
-									class="glyphicon glyphicon-pencil" 
-									data-toggle="modal" 
-									data-target="#editModal" 
-									data-toggle="tooltip" 
-									title="Click to edit last pick">
-									Edit Pick
-								</span>
-							</button>
-							&nbsp;&nbsp;
-							<button 
-								type="button" 
-								id="makePickButton" 
-								name="makePickButton" 
-								class="btn btn-primary btn-xs" 
-								data-id = "{{ $myPick->team->id }}" 
-								data-name = "{{ $myPick->team->name }}">
-								<span 
-									class="glyphicon glyphicon-plus" 
-									data-toggle="modal" 
-									data-target="#makeModal" 
-									data-toggle="tooltip" 
-									title="Click to add next week's pick"> 
-									Make Pick
-								</span>
-							</button>
-						</td>
-				    </tr>	  	        	 
-				@endforeach
+	    		@if (isset($myPicks->pick))
+			    	<tr>
+			    		<th>Team</th>
+			    		@for ($i = 1; $i < $currentWeek + 1; $i++) 
+			    			<th class="text-center">{{ $i }}</th>
+			    		@endfor 
+			    		<th></th>
+		    		</tr>
+		    		@foreach($myPicks as $myPick) 		
+						<tr>
+							<td>{{ $myPick->name }}</td>
+				        	@foreach($myPick->pick as $myPick)
+				            	<td class="text-center">{{ $myPick->nflteam->abbreviation }}</td>
+				            @endforeach
+			            	<td>
+								<button 
+									type="button" 
+									id="editPickButton"
+									name="editPickButton"
+									class="btn btn-default btn-xs"
+									data-nonsence = "{{ $myPick->id }}"
+									data-id = "{{ $myPick->team->id }}"
+									data-name = "{{ $myPick->team->name }}"
+									data-pick = "{{ $myPick->nflteam->id }}">
+									<span 
+										class="glyphicon glyphicon-pencil" 
+										data-toggle="modal" 
+										data-target="#editModal" 
+										data-toggle="tooltip" 
+										title="Click to edit last pick">
+										Edit Pick
+									</span>
+								</button>
+								&nbsp;&nbsp;
+								<button 
+									type="button" 
+									id="makePickButton" 
+									name="makePickButton" 
+									class="btn btn-primary btn-xs" 
+									data-id = "{{ $myPick->team->id }}" 
+									data-name = "{{ $myPick->team->name }}">
+									<span 
+										class="glyphicon glyphicon-plus" 
+										data-toggle="modal" 
+										data-target="#makeModal" 
+										data-toggle="tooltip" 
+										title="Click to add next week's pick"> 
+										Make Pick
+									</span>
+								</button>
+							</td>
+					    </tr>	  	        	 
+					@endforeach
+		    	@else
+			    	<tr>
+			    		<th>Team</th>
+						<th>{{ $currentWeek }} </th>
+			    		<th></th>
+		    		</tr>
+		    		@foreach($myPicks as $myPick)
+			    		<tr>			    			
+							<td>{{ $myPick->name }}</td>
+					        <td>
+					        	<button 
+									type="button" 
+									id="makePickButton" 
+									name="makePickButton" 
+									class="btn btn-primary btn-xs" 
+									data-id = "{{ $myPick->id }}" 
+									data-name = "{{ $myPick->name }}">
+									<span 
+										class="glyphicon glyphicon-plus" 
+										data-toggle="modal" 
+										data-target="#makeModal" 
+										data-toggle="tooltip" 
+										title="Click to add next week's pick"> 
+										Make Pick
+									</span>
+								</button>
+					        </td>
+					    </tr>
+				    @endforeach
+				@endif
 			</table>
 			<!-- <a href="/team/create"><span class="glyphicon glyphicon-plus"></span> Add Another Team</a> -->
 		@endif
@@ -110,9 +140,14 @@ such as a page specific stylesheets.
 	<table class = 'table table-condensed'>
 		<tr>
     		<th>Team</th>
-    		@for ($i = 1; $i < $currentWeek + 1; $i++) 
-    			<th class="text-center">{{ $i }}</th>
-    		@endfor 
+    		@if (isset($myPicks->pick))
+    		    @for ($i = 1; $i < $currentWeek + 1; $i++) 
+    				<th class="text-center">{{ $i }}</th>
+    			@endfor 
+    		@else
+    			<th>1</th>
+    		@endif
+
     		<th></th>
     	</tr>
 
@@ -120,7 +155,7 @@ such as a page specific stylesheets.
 				<tr>
 					<td>{{ $team->name }}</td>
 			        	@foreach($team->pick as $pick)
-			            	<td class="text-center">{{ $pick->nflteam->abbreviation}}</td>
+			            	<td>{{ $pick->nflteam->abbreviation}}</td>
 			            @endforeach
 	
 		        </tr>	  	        	 
@@ -181,19 +216,23 @@ such as a page specific stylesheets.
 			      	<div class="modal-body">
 			        	<p>Picks must be made no later than Friday, 3PM Central time. If you want to pick a team playing Thursday, the pick must be made before game start.</p>
 				    	<input type="hidden" value="{{ csrf_token() }}" name="_token">
-			            <div class = "form-group">
-			            	<label for="pickWeek">Week</label>
-			            	<input type = "text" class = "form-control" id="pickWeek" name="pick_week" value= "{{ $currentWeek + 1 }}" disabled><br />
-			            	<label for="team">Team</label>
-			            	<input type = "hidden" id="makePickTeamId" name="makePickTeamId"><br />
-			            	<input type = "text" id="makePickTeamName" name="makePickTeamName" class = "form-control" disabled><br />
-			                <label for="pick">Pick</label>
-			                <select name='pick' id='pick' class='form-control'>
-			                	@foreach($teams_for_dropdown as $nflteam_id => $nflteam_name)
-			                		<option value='{{ $nflteam_id }}'> {{ $nflteam_name }} </option>
-		                		@endforeach
-		                	</select>
-			            </div>
+				            <div class = "form-group">
+				            	<label for="pickWeek">Week</label>
+				            	@if (isset($myPicks->pick))
+				            		<input type = "text" class = "form-control" id="pickWeek" name="pick_week" value= "{{ $currentWeek + 1 }}" disabled><br />
+				            	@else
+				            		<input type = "text" class = "form-control" id="pickWeek" name="pick_week" value= "{{ $currentWeek }}" disabled><br />
+				            	@endif
+				            	<label for="team">Team</label>
+				            	<input type = "hidden" id="makePickTeamId" name="makePickTeamId"><br />
+				            	<input type = "text" id="makePickTeamName" name="makePickTeamName" class = "form-control" disabled><br />
+				                <label for="pick">Pick</label>
+				                <select name='pick' id='pick' class='form-control'>
+				                	@foreach($teams_for_dropdown as $nflteam_id => $nflteam_name)
+				                		<option value='{{ $nflteam_id }}'> {{ $nflteam_name }} </option>
+			                		@endforeach
+			                	</select>
+				            </div>
 		      		</div>
 		   		 
 			      	<div class="modal-footer">

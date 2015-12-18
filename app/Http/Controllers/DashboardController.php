@@ -19,8 +19,8 @@ class DashboardController extends Controller
         // dump($teams->toArray()); // for debugging
 
         $picks = \App\Pick::all();
-        $picksWeek = $picks->last();
-        $currentWeek = $picksWeek->week; // Future functionality will restrict picks to only be future so using last will work
+        $currentWeek = 1;
+         // Future functionality will restrict picks to only be future so using last will work
         // dump($picks->toArray()); // for debugging
         // echo $currentWeek->week; // for debugging
 
@@ -33,6 +33,8 @@ class DashboardController extends Controller
 
         // $myPicks = \App\Pick::with('nflteam')->get();
         $myPicks = $teams->where('user_id', $user->id);
+        // var_dump($myPicks->name);
+        // var_dump(isset($myPicks->pick));
         // dump($myPicks->toArray()); // for debugging
 
         return view('dashboard')->with([ 'teams'=>$teams, 'picks'=>$picks, 'nflteams'=>$nflteams, 'currentWeek'=>$currentWeek, 'myPicks'=>$myPicks, 'user'=>$user, 'teams_for_dropdown'=>$teams_for_dropdown]);
@@ -63,6 +65,7 @@ class DashboardController extends Controller
 
     public function postPick(Request $request) {
 
+        $picks = \App\Pick::all();
         $currentWeek = 1;
 
         // Make Pick
@@ -70,7 +73,11 @@ class DashboardController extends Controller
             $pick = new \App\Pick();
             
             // Set parameters
-            $pick->week = $currentWeek+1;
+            if (isset($myPicks->pick)){
+                $pick->week = $currentWeek+1;
+            } else {
+                $pick->week = $currentWeek;
+            }
             $pick->team_id = $request->makePickTeamId; 
             $pick->nflteam_id = $request->pick;
 
