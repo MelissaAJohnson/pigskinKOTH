@@ -105,7 +105,7 @@ such as a page specific stylesheets.
 						@foreach($myPicks as $myPick)
 			    		<tr>			    			
 							<td>{{ $myPick->name }}</td>
-					        <td>
+					        <td class="text-center">
 					        	<button 
 									type="button" 
 									id="makePickButton" 

@@ -47,7 +47,7 @@ such as a page specific stylesheets.
             	placeholder="Team Name"
             >
         </div>
-        <span style = "cursor:pointer; padding-left:.75em" id = "addTeam" name-"addTeam"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Team</span>
+        <!-- <span style = "cursor:pointer; padding-left:.75em" id = "addTeam" name-"addTeam"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Team</span> -->
 
         <br /><br />
         <button type = "submit" id = "teamSave" class = "btn btn-default">Save</button>
