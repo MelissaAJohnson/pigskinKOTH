@@ -41,21 +41,23 @@ such as a page specific stylesheets.
     <br />
     <h3>My Picks</h3>
     
-    	@if (count($myPicks) < 1)
-    		<h4>Create a team to play!</h4>
-    		<p>When you add a team and make picks, your picks will show here</p>
-    		<a href="/team/create"><span class="glyphicon glyphicon-plus"></span> Add Team</a>
-    	@else
-	    	<table class = 'table table-condensed'>	
-	    		@if (isset($myPicks->pick))
-			    	<tr>
-			    		<th>Team</th>
-			    		@for ($i = 1; $i < $currentWeek + 1; $i++) 
-			    			<th class="text-center">{{ $i }}</th>
-			    		@endfor 
-			    		<th></th>
-		    		</tr>
-		    		@foreach($myPicks as $myPick) 		
+	@if (count($myPicks) < 1)
+		<h4>Create a team to play!</h4>
+		<p>When you add a team and make picks, your picks will show here</p>
+		<a href="/team/create"><span class="glyphicon glyphicon-plus"></span> Add Team</a>
+	@else
+    	<table class = 'table table-condensed'>	
+    			
+		    	<tr>
+		    		<th>Team</th>
+		    		@for ($i = 1; $i < $currentWeek + 1; $i++) 
+		    			<th class="text-center">{{ $i }}</th>
+		    		@endfor 
+		    		<th></th>
+	    		</tr>
+	    		@foreach($myPicks as $myPick)
+		    		
+		    		@if (!$myPick->pick->isEmpty()) 		
 						<tr>
 							<td>{{ $myPick->name }}</td>
 				        	@foreach($myPick->pick as $myPick)
@@ -98,15 +100,9 @@ such as a page specific stylesheets.
 									</span>
 								</button>
 							</td>
-					    </tr>	  	        	 
-					@endforeach
-		    	@else
-			    	<tr>
-			    		<th>Team</th>
-						<th>{{ $currentWeek }} </th>
-			    		<th></th>
-		    		</tr>
-		    		@foreach($myPicks as $myPick)
+					    </tr>	
+					@else  
+						@foreach($myPicks as $myPick)
 			    		<tr>			    			
 							<td>{{ $myPick->name }}</td>
 					        <td>
@@ -128,11 +124,12 @@ such as a page specific stylesheets.
 								</button>
 					        </td>
 					    </tr>
-				    @endforeach
-				@endif
-			</table>
-			<!-- <a href="/team/create"><span class="glyphicon glyphicon-plus"></span> Add Another Team</a> -->
-		@endif
+				    	@endforeach	    
+			    	@endif    	 
+				@endforeach	    	
+		</table>
+		<!-- <a href="/team/create"><span class="glyphicon glyphicon-plus"></span> Add Another Team</a> -->
+	@endif
     
 
 
