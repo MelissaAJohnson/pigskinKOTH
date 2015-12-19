@@ -85,6 +85,25 @@ such as a page specific stylesheets.
 								&nbsp;&nbsp;
 								<button 
 									type="button" 
+									id="deletePickButton" 
+									name="deletePickButton" 
+									class="btn btn-default btn-xs" 
+									data-whatever = "{{ $myPick->id }}"
+									data-id = "{{ $myPick->team->id }}" 
+									data-name = "{{ $myPick->team->name }}"
+									data-pick = "{{ $myPick->nflteam->abbreviation }}">
+									<span 
+										class="glyphicon glyphicon-minus" 
+										data-toggle="modal" 
+										data-target="#deleteModal" 
+										data-toggle="tooltip" 
+										title="Click to delete pick"> 
+										Delete Pick
+									</span>
+								</button>
+								&nbsp;&nbsp;
+								<button 
+									type="button" 
 									id="makePickButton" 
 									name="makePickButton" 
 									class="btn btn-primary btn-xs" 
@@ -198,6 +217,41 @@ such as a page specific stylesheets.
 	    	</div>
 	  	</div>
 	</div>
+
+	<!-- Delete Pick modal -->
+	<div class="modal fade" id="deleteModal">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title">Delete Pick</h4>
+		      	</div>
+		      	<form method="POST" action='/dashboard/pickDelete'>
+			      	<div class="modal-body">
+			        	<p>Are you sure you want to delete your pick?</p>
+				    	<input type="hidden" value="{{ csrf_token() }}" name="_token">
+			            <div class = "form-group">
+			            	<input type = "hidden" id="deletePickId" name="deletePickId">
+			            	<label for="pickWeek">Week</label>
+			            	<input type = "text" id="deletePickWeek" name="deletePickWeek" class = "form-control" value= "{{ $currentWeek }}" disabled><br />
+			            	<label for="team">Team</label>
+			            	<input type = "hidden" id="deletePickTeamId" name="deletePickTeamId">
+			            	<input type = "text" id="deletePickTeamName" name="deletePickTeamName" class = "form-control" disabled><br />
+			                <label for="pick">Pick</label>
+			            	<input type = "text" id="deletePickTeamPick" name="deletePickTeamPick" class = "form-control" disabled>
+
+			            </div>
+		      		</div>
+		   		 
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        	<button type="submit" id="pickDelete" class="btn btn-primary">Delete Pick</button>
+			      	</div>
+		      	</form>
+	    	</div>
+	  	</div>
+	</div>
+
 
 	<!-- Make Pick modal -->
 	<div class="modal fade" id="makeModal">

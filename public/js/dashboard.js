@@ -24,4 +24,19 @@ $(document).ready(function(){
 		$(".modal-body #editPickTeamPick").val(myTeamPick);
 	});
 
+		$(document).on("click", "#deletePickButton", function () {
+		var myPickId = $(this).data('whatever');
+		var myTeamId = $(this).data('id');
+		var myTeamName = $(this).data('name');
+		var myTeamPick = $(this).data('pick');
+		console.log(myPickId);
+		console.log(myTeamId);
+		console.log(myTeamName);
+		console.log(myTeamPick);
+		$(".modal-body #deletePickId").val(myPickId);
+		$(".modal-body #deletePickTeamId").val(myTeamId);
+		$(".modal-body #deletePickTeamName").val(myTeamName);
+		$(".modal-body #deletePickTeamPick").val(myTeamPick);
+	});
+
 });

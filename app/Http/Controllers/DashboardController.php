@@ -63,6 +63,27 @@ class DashboardController extends Controller
 
     }
 
+        public function postDelete(Request $request) {
+
+        $currentWeek = 1;
+
+        // Delete Pick
+            // Retrieve Pick to be edited
+            $pick = \App\Pick::find($request->deletePickId);
+            // dump($pick);
+            
+
+            // This will delete the record 
+            $pick->delete();
+        // End edit pick
+
+        \Session::flash('flash_message','Your pick was deleted');
+        
+        // return view()
+        return redirect('/dashboard/');
+
+    }
+
     public function postPick(Request $request) {
 
         $picks = \App\Pick::all();

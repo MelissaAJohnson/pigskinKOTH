@@ -52,6 +52,7 @@ Route::get('dashboard/{id?}', [
 
 Route::post('/dashboard/pickCreate', 'DashboardController@postPick');
 Route::post('/dashboard/pickEdit', 'DashboardController@postEdit');
+Route::post('/dashboard/pickDelete', 'DashboardController@postDelete');
 
 Route::get('/team/create', [
     'middleware' => 'auth',
