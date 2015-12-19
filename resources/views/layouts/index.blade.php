@@ -20,7 +20,7 @@ such as a page specific styesheets.
 @section('top_nav')
   <div class="navbar navbar-static-top">
     <div class="nav navbar-nav navbar-right"> 
-        <a href="/login">Login</a></li>
+        <a href="/login">Login</a>
     </div>
   </div>
 @stop

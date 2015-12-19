@@ -52,8 +52,9 @@
         <div id = "footer">
             <div class="container text-center">
                 <div class = "muted credit">
+                    <br />
+                    <hr />
                     <p>
-                        <hr />
                         &copy; {{ date('Y') }} MJ Productions
                     </p>
                 </div>
