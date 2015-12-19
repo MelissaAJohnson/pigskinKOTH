@@ -3,7 +3,7 @@
 @section('top_nav')
   <div class="navbar navbar-static-top">
     <div class="nav navbar-nav navbar-right"> 
-        <li><a href="/">Home</a></li>
+        <a href="/">Home</a>
     </div>
   </div>
 @stop
